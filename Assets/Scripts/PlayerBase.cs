@@ -15,13 +15,17 @@ public class PlayerBase : MonoBehaviour
     public CH_STATE ch_State;
     public bool isNewState;
 
-    public CharacterState State;
+    //public CharacterState State;
+
+    public GameObject[] AttackEffect;
+
 
     protected virtual void Awake()
     {
         b_rigid = GetComponentInChildren<Rigidbody>();
         b_animator = GetComponentInChildren<Animator>();
-        State = GetComponent<CharacterState>();
+        //State = GetComponent<CharacterState>();
+        AttackEffect = Resources.LoadAll<GameObject>("Resources");
     }
 
     protected virtual void OnEnable()

@@ -17,6 +17,13 @@ public class Player : PlayerBase
     private bool canAttack;
     private Vector3 destination;
 
+
+    [SerializeField] private GameObject bullet = null;
+    [SerializeField] private Transform bulletPos = null;
+    [SerializeField] private Transform target = null;
+
+    [SerializeField] private GameObject attack01Bullet = null;
+
     [Header("Player")]
     [SerializeField]
     private float playerAttackRange = 10.0f;
@@ -31,7 +38,7 @@ public class Player : PlayerBase
     private void Update()
     {
         InputSkillBtn();
-        if (!isMove) { NormalAttack(); } 
+        if (!isMove && !isAttackNow) { NormalAttack(); } 
         if (!isAttackNow) {  LookMoveDirection(); } // 움직임
     }
 
@@ -64,7 +71,7 @@ public class Player : PlayerBase
 
     private void NormalAttack()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             RaycastHit hit;
             if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
@@ -75,7 +82,7 @@ public class Player : PlayerBase
                     Vector3 characterPos = transform.position;
                     Vector3 enemyPos = hit.transform.position;
 
-                    float attackDirf = (characterPos - enemyPos).magnitude;
+                    float attackDirf = (enemyPos - characterPos).magnitude;
                     
 
                     Debug.Log("AT : " + attackDirf);
@@ -92,6 +99,17 @@ public class Player : PlayerBase
                         Debug.Log("IN");
                         transform.LookAt(enemyPos);
 
+
+                        target = hit.transform.gameObject.transform;
+                        GameObject shotBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+                        shotBullet.GetComponent<Bullet>().isAlive = true;
+                        shotBullet.GetComponent<Bullet>().target = target;
+
+                        /*
+                        // 플레이어 공격 파티클
+                        Vector3 _p = new Vector3(hit.point.x, 0, hit.point.z);
+                        var _clone = Instantiate(AttackEffect[0], _p, AttackEffect[0].transform.rotation) as GameObject;
+                        */
 
                         isAttackNow = true;
                         SetState(CH_STATE.JumpUpAttack);
@@ -124,7 +142,6 @@ public class Player : PlayerBase
         }
     }
 
-
     public void LookMoveDirection()
     {
         if (Input.GetMouseButton(1))
@@ -138,7 +155,7 @@ public class Player : PlayerBase
 
         if (isMove)
         {
-            if (agent.velocity.magnitude == 0f)
+            if (agent.velocity.magnitude <= 0.2f)
             {
                 isMove = false;
                 
@@ -218,7 +235,12 @@ public class Player : PlayerBase
         {
             yield return null;
 
-            if(b_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack01") && 
+            GameObject obj_attack01Bullet = Instantiate(attack01Bullet, new Vector3(transform.localPosition.x, transform.localPosition.y + 10, transform.localPosition.z + 5f), transform.rotation);
+
+
+            yield return new WaitForSeconds(1.0f);
+
+            if (b_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack01") && 
                 b_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 isAttackNow = false;
