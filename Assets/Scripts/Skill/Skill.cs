@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class Skill : MonoBehaviour
 {
     Player player;
+    
+    private float rotateSpeed = 1.0f;
+
 
     public bool isMouseBtn1 = false;
     public bool isMouseBtn2 = false;
@@ -46,7 +50,6 @@ public class Skill : MonoBehaviour
     {
         attack01Pos = attack01PosBox.transform.GetComponentsInChildren<Transform>();
         player = GetComponent<Player>();
-
     }
 
     void Update()
@@ -70,6 +73,15 @@ public class Skill : MonoBehaviour
                
 
                     attack01PosBox.transform.position = nextVec;
+
+                    // 캐릭터 회전
+                    Vector3 targetPosition = new Vector3(rayHit.point.x, transform.position.y, rayHit.point.z);
+                    Vector3 lookAtDirection = targetPosition - transform.position;
+                    Quaternion rotation = Quaternion.LookRotation(lookAtDirection);
+
+                   Rigidbody rb2 = player.GetComponent<Rigidbody>();
+
+                    rb2.MoveRotation(Quaternion.Slerp(transform.rotation, rotation, 100.0f * Time.deltaTime));
                 }
 
                 // 상태
@@ -106,23 +118,36 @@ public class Skill : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 nextVec = new Vector3(0, 0, 0);
-
+            Quaternion rotation = Quaternion.identity;
             if (Physics.Raycast(ray, out rayHit))
             {
                 nextVec = rayHit.point;
+
+
+                Vector3 targetPosition = new Vector3(rayHit.point.x, transform.position.y, rayHit.point.z);
+                Vector3 lookAtDirection = targetPosition - transform.position;
+                rotation = Quaternion.LookRotation(lookAtDirection);
+
+                // 캐릭터의 회전을 Rigidbody를 이용하여 처리합니다.
+                Rigidbody rb2 = player.GetComponent<Rigidbody>();
+
+                rb2.MoveRotation(Quaternion.Slerp(transform.rotation, rotation, 100.0f * Time.deltaTime));
             }
 
             // 상태
             player.SetState(CH_STATE.Attack02Start);
 
             // 실행
-            GameObject Effect2_1 = Instantiate(attack02Effect, new Vector3(nextVec.x-1, nextVec.y + 1, nextVec.z), this.transform.rotation);
+            //GameObject Effect2_1 = Instantiate(attack02Effect, new Vector3(nextVec.x-1, nextVec.y + 1, nextVec.z), this.transform.rotation);
             //GameObject Effect2_2 = Instantiate(attack02Effect, new Vector3(nextVec.x, nextVec.y + 1, nextVec.z), this.transform.rotation);
             //GameObject Effect2_3 = Instantiate(attack02Effect, new Vector3(nextVec.x+1, nextVec.y + 1, nextVec.z), this.transform.rotation);
 
-            //GameObject Effect2_1 = Instantiate(attack02Effect,, this.transform.rotation);
-            GameObject Effect2_2 = Instantiate(attack02Effect, new Vector3(nextVec.x, nextVec.y + 1, nextVec.z), this.transform.rotation);
-            GameObject Effect2_3 = Instantiate(attack02Effect, new Vector3(nextVec.x + 1, nextVec.y + 1, nextVec.z), this.transform.rotation);
+            Vector3 attackPos = new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z);
+
+
+            GameObject Effect2_1 = Instantiate(attack02Effect, attackPos, rotation);
+            GameObject Effect2_2 = Instantiate(attack02Effect, attackPos, rotation);
+            GameObject Effect2_3 = Instantiate(attack02Effect, attackPos, rotation);
 
 
             Destroy(Effect2_1, 3.0f);
