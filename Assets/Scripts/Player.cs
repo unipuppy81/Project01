@@ -7,10 +7,11 @@ using UnityEngine.AI;
 
 public class Player : PlayerBase
 {
-    
+    [Header("Player")]
+
     private Camera camera;
     private NavMeshAgent agent;
-
+    private Skill skill;
 
     private bool isMove;
     private bool isAttackNow;
@@ -24,14 +25,14 @@ public class Player : PlayerBase
 
     [SerializeField] private GameObject attack01Bullet = null;
 
-    [Header("Player")]
-    [SerializeField]
-    private float playerAttackRange = 10.0f;
+
+    [SerializeField] private float playerAttackRange = 10.0f;
 
     protected override void Awake()
     {
         camera = Camera.main;
         agent = GetComponent<NavMeshAgent>();
+        skill = GetComponent<Skill>();
     }
 
 
@@ -235,8 +236,7 @@ public class Player : PlayerBase
         {
             yield return null;
 
-            GameObject obj_attack01Bullet = Instantiate(attack01Bullet, new Vector3(transform.localPosition.x, transform.localPosition.y + 10, transform.localPosition.z + 5f), transform.rotation);
-
+            skill.Attack01Skill();
 
             yield return new WaitForSeconds(1.0f);
 
@@ -253,6 +253,11 @@ public class Player : PlayerBase
     {
         do
         {
+
+
+
+
+
             yield return null;
 
             if (b_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack02Start") &&
