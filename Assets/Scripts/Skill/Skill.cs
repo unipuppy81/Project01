@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Skill : MonoBehaviour
 {
     Player player;
-    
+    PlayerCursor playerCursor;
+
     private float rotateSpeed = 1.0f;
+
+    private RectTransform transform_cursor;
 
 
     public bool isMouseBtn1 = false;
@@ -29,7 +31,7 @@ public class Skill : MonoBehaviour
     [Header("Skill02")]
 
     [SerializeField] GameObject attack02Effect = null;
-
+    [SerializeField] GameObject fireBase = null;
 
 
 
@@ -50,6 +52,7 @@ public class Skill : MonoBehaviour
     {
         attack01Pos = attack01PosBox.transform.GetComponentsInChildren<Transform>();
         player = GetComponent<Player>();
+        playerCursor =  GetComponent<PlayerCursor>();
     }
 
     void Update()
@@ -59,9 +62,12 @@ public class Skill : MonoBehaviour
         if (isMouseBtn3) { Attack03Skill(); }
         if (isMouseBtn4) { JumpAttack(); }
     }
+
     public void Attack01Skill()
     {
-            if(Input.GetMouseButtonDown(0)) 
+            playerCursor.cursor01Changed = true;
+
+            if (Input.GetMouseButtonDown(0)) 
             {
                 // 마우스
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -79,9 +85,9 @@ public class Skill : MonoBehaviour
                     Vector3 lookAtDirection = targetPosition - transform.position;
                     Quaternion rotation = Quaternion.LookRotation(lookAtDirection);
 
-                   Rigidbody rb2 = player.GetComponent<Rigidbody>();
+                    Rigidbody rb2 = player.GetComponent<Rigidbody>();
 
-                    rb2.MoveRotation(Quaternion.Slerp(transform.rotation, rotation, 100.0f * Time.deltaTime));
+                    rb2.MoveRotation(Quaternion.Slerp(transform.rotation, rotation, 1000.0f * Time.deltaTime));
                 }
 
                 // 상태
@@ -105,6 +111,7 @@ public class Skill : MonoBehaviour
 
                 // 종료
                 isMouseBtn1 = false;
+                playerCursor.cursor01Changed = false;
             }
     }
 
@@ -112,6 +119,7 @@ public class Skill : MonoBehaviour
 
     public void Attack02Skill()
     {
+        playerCursor.cursor02Changed = true;
         if (Input.GetMouseButtonDown(0))
         {
             // 마우스
@@ -142,13 +150,19 @@ public class Skill : MonoBehaviour
             //GameObject Effect2_2 = Instantiate(attack02Effect, new Vector3(nextVec.x, nextVec.y + 1, nextVec.z), this.transform.rotation);
             //GameObject Effect2_3 = Instantiate(attack02Effect, new Vector3(nextVec.x+1, nextVec.y + 1, nextVec.z), this.transform.rotation);
 
-            Vector3 attackPos = new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z);
 
 
-            GameObject Effect2_1 = Instantiate(attack02Effect, attackPos, rotation);
-            GameObject Effect2_2 = Instantiate(attack02Effect, attackPos, rotation);
-            GameObject Effect2_3 = Instantiate(attack02Effect, attackPos, rotation);
+            Vector3 attackPos1 = new Vector3(this.transform.position.x-1, this.transform.position.y + 1, this.transform.position.z);
+            Vector3 attackPos2 = new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z);
+            Vector3 attackPos3 = new Vector3(this.transform.position.x+1, this.transform.position.y + 1, this.transform.position.z);
 
+            GameObject fireBase1 = Instantiate(fireBase, this.transform.position, rotation);
+
+            GameObject Effect2_1 = Instantiate(attack02Effect, attackPos1, rotation);
+            GameObject Effect2_2 = Instantiate(attack02Effect, attackPos2, rotation);
+            GameObject Effect2_3 = Instantiate(attack02Effect, attackPos3, rotation);
+
+            Destroy(fireBase1, 3.0f);
 
             Destroy(Effect2_1, 3.0f);
             Destroy(Effect2_2, 3.0f);
@@ -156,22 +170,33 @@ public class Skill : MonoBehaviour
 
             // 종료
             isMouseBtn2 = false;
+            playerCursor.cursor02Changed = false;
         }
         
     }
 
     public void Attack03Skill()
     {
+        playerCursor.cursor01Changed = true;
         if (Input.GetMouseButtonDown(0))
         {
             // 마우스
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 nextVec = new Vector3(0, 0, 0);
-
+            Quaternion rotation = Quaternion.identity;
             if (Physics.Raycast(ray, out rayHit))
             {
                 nextVec = rayHit.point;
+
+                Vector3 targetPosition = new Vector3(rayHit.point.x, transform.position.y, rayHit.point.z);
+                Vector3 lookAtDirection = targetPosition - transform.position;
+                rotation = Quaternion.LookRotation(lookAtDirection);
+
+                // 캐릭터의 회전을 Rigidbody를 이용하여 처리합니다.
+                Rigidbody rb2 = player.GetComponent<Rigidbody>();
+
+                rb2.MoveRotation(Quaternion.Slerp(transform.rotation, rotation, 1000.0f * Time.deltaTime));
             }
 
             // 상태
@@ -182,6 +207,7 @@ public class Skill : MonoBehaviour
 
             // 종료
             isMouseBtn3 = false;
+            playerCursor.cursor01Changed = false;
         }
 
     }

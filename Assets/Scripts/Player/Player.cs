@@ -13,7 +13,7 @@ public class Player : PlayerBase
     private Camera camera;
     private NavMeshAgent agent;
     private Skill skill;
-    private PlayerCursor cursor;
+
 
 
     private bool isMove;
@@ -36,7 +36,7 @@ public class Player : PlayerBase
         camera = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         skill = GetComponent<Skill>();
-        cursor = GetComponent<PlayerCursor>();
+
     }
 
 
@@ -58,20 +58,18 @@ public class Player : PlayerBase
         {
             isAttackNow = true;
             skill.isMouseBtn1 = true;
-            //skill.Attack01Skill2();
-            //SetState(CH_STATE.Attack01);
+            
         }
         else if (Input.GetKeyDown(KeyCode.W) && !isMove && !isAttackNow)
         {
             isAttackNow = true;
             skill.isMouseBtn2 = true;
-            //SetState(CH_STATE.Attack02Start);
+
         }
         else if (Input.GetKeyDown(KeyCode.E) && !isMove && !isAttackNow)
         {
             isAttackNow = true;
             skill.isMouseBtn3 = true;
-            //SetState(CH_STATE.Attack03Start);
         }
         else if(Input.GetKeyDown(KeyCode.R) && !isMove && !isAttackNow)
         {
