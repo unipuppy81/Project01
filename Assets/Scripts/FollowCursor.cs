@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class FollowCursor : MonoBehaviour
 {
+    private Player player;
+
     [SerializeField] private bool isCursorOn = false;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player01").GetComponent<Player>();
+    }
 
     void Update()
     {
@@ -15,7 +22,7 @@ public class FollowCursor : MonoBehaviour
 
             if (Physics.Raycast(ray, out rayHit))
             {
-                Vector3 nextVec = new Vector3(rayHit.point.x, 1.1f, rayHit.point.z);
+                Vector3 nextVec = new Vector3(rayHit.point.x, player.transform.position.y + 2.0f, rayHit.point.z);
                 transform.position = nextVec;        
             }  
         }

@@ -15,7 +15,7 @@ public class Player : PlayerBase
     private Skill skill;
 
 
-
+    private bool canGame = false;
     private bool isMove;
     private bool isAttackNow;
     private bool canAttack;
@@ -37,19 +37,36 @@ public class Player : PlayerBase
         agent = GetComponent<NavMeshAgent>();
         skill = GetComponent<Skill>();
 
+
     }
 
+    void Start()
+    {
+        Invoke("ClearNav", 2.0f);
+
+    }
 
     private void Update()
     {
-        InputSkillBtn();
+        if (canGame)
+        {
+            InputSkillBtn();
 
-        if (Input.GetKeyDown(KeyCode.S) && !isAttackNow) { MoveStop(); }
-        if (!isMove && !isAttackNow) { NormalAttack(); } 
-        if (!isAttackNow) {  LookMoveDirection(); } // 움직임
+            if (Input.GetKeyDown(KeyCode.S) && !isAttackNow) { MoveStop(); }
+            if (!isMove && !isAttackNow) { NormalAttack(); }
+            if (!isAttackNow) { LookMoveDirection(); } // 움직임
+        }
+       
     }
 
+    private void ClearNav()
+    {
 
+        agent.enabled = false;
+        agent.enabled = true;
+
+        canGame = true;
+    }
    
     private void InputSkillBtn()
     {
@@ -163,7 +180,9 @@ public class Player : PlayerBase
             RaycastHit hit;
             if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                if (hit.transform.gameObject.CompareTag("Ground")){ SetDestination(hit.point); }   
+
+                if (hit.transform.gameObject.CompareTag("Ground")){ SetDestination(hit.point); }
+ 
             }
         }
 
