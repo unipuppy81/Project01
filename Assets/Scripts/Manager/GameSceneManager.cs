@@ -26,12 +26,14 @@ public class GameSceneManager : SingletonType<GameSceneManager>
 
     private void Update()
     {
+        /*
         if (Input.GetKeyUp(KeyCode.Space))
         {
             sceneControl.SetActive(true);
             LoadingSceneManager.nextScene = "Stage1";
             //GameManager.Instance.characterPosition = characterTransform.position;
         }
+        */
     }
     private void Init()
     {

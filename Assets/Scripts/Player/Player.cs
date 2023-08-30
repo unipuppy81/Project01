@@ -11,11 +11,11 @@ public class Player : PlayerBase
     [Header("Player")]
 
     private Camera camera;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private Skill skill;
 
 
-    private bool canGame = false;
+    public bool canGame = false;
     private bool isMove;
     private bool isAttackNow;
     private bool canAttack;
