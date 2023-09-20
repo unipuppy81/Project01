@@ -35,8 +35,8 @@ public class DragEnemy : MonoBehaviour
 
             if (col.tag == "Enemy")
             {
-                col.gameObject.GetComponent<Enemy>().isDragging = true;
-                col.gameObject.GetComponent<Enemy>().DragPosition = this.transform.position;
+                col.gameObject.GetComponent<EnemyBase>().isDragging = true;
+                col.gameObject.GetComponent<EnemyBase>().DragPosition = this.transform.position;
             }
         }
 
@@ -63,7 +63,7 @@ public class DragEnemy : MonoBehaviour
 
             if (col.tag == "Enemy")
             {
-                col.gameObject.GetComponent<Enemy>().isDragging = false;
+                col.gameObject.GetComponent<EnemyBase>().isDragging = false;
                 //col.gameObject.GetComponent<Enemy>().DragPosition = this.transform.position;
             }
         }
