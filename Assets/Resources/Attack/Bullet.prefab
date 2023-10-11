@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5582874474573340660}
   - component: {fileID: 3080649755778791506}
   - component: {fileID: -2908379992904889326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,8 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764c7cf5ebc591041b64ccd85ca2123c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Effect: {fileID: 7226888052703040409, guid: 5bd94ee6b6c94fb49ac41d761fb3e13d, type: 3}
+  attackType: 0
+  NormalEffect: {fileID: 7226888052703040409, guid: 5bd94ee6b6c94fb49ac41d761fb3e13d, type: 3}
   target: {fileID: 0}
-  speed: 5
+  speed: 10
   rotationSpeed: 5
   isAlive: 0
+  Attack01Effect: {fileID: 4593184484909914552, guid: 60ab07868fb691f488bf89c8aa804b79, type: 3}
+  Attack02Effect: {fileID: 8764043878647920493, guid: a257a46a6c55cf744b563876b45bc5d6, type: 3}
+  Attack03Effect: {fileID: 7305185502956871417, guid: ce8950418d166ac4d903d884521f0578, type: 3}
+  JumpAttackEffect: {fileID: 0}

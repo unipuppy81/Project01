@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum AttackType
+{
+    NormalAttack,
+    Attack01,
+    Attack02,
+    Attack03,
+    JumpAttack
+}
+
 public class Skill : MonoBehaviour
 {
     Player player;
@@ -106,6 +115,7 @@ public class Skill : MonoBehaviour
                 for (int i = 0; i < newAttackPos.Length; i++)
                 {
                     GameObject shotBullet = Instantiate(attack01, newAttackPos[i].transform.position, newAttackPos[i].transform.rotation);
+                    Debug.Log("TT");   
                 }
 
 

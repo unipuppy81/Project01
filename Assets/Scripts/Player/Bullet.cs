@@ -2,26 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+
+
+public class Bullet : Skill
 {
-    public enum AttackType
-    {
-        NormalAttack,
-        Attack01,
-        Attack02,
-        Attack03,
-        JumpAttack
-    }
+    public AttackType attackType;
 
-
-    [SerializeField] private GameObject Effect;
-
+    [Header("NormalAttack")]
+    [SerializeField] private GameObject NormalEffect;
     public Transform target = null;
-
     public float speed = 5.0f;
     public float rotationSpeed = 5f;
 
     public bool isAlive = false;
+
+
     void Start()
     {
 
@@ -31,12 +26,12 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         GoTarget();
+        if(target == null) { Destroy(this.gameObject); }
     }
-
 
     void GoTarget()
     {
-        if (isAlive)
+        if (isAlive && target != null)
         {
             // 목표 방향으로 회전
             Vector3 direction = (target.position - transform.position).normalized;
@@ -50,10 +45,21 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("충돌");
-        Instantiate(Effect, transform.position, transform.rotation);
+        float Damage;
 
-        Destroy(this.gameObject);
+        if (attackType == AttackType.NormalAttack && other.tag == "Enemy")
+        { 
 
+            EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+            enemy.GetDamage(4.0f);
+            Instantiate(NormalEffect, transform.position, transform.rotation);
+
+
+            Damage = 4.0f;
+
+
+
+            Destroy(this.gameObject);
+        }
     }
 }

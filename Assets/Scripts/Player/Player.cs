@@ -29,7 +29,7 @@ public class Player : PlayerBase
     [SerializeField] private GameObject attack01Bullet = null;
 
 
-    [SerializeField] private float playerAttackRange = 10.0f;
+    [SerializeField] private float playerAttackRange = 200.0f;
 
     protected override void Awake()
     {
@@ -56,7 +56,15 @@ public class Player : PlayerBase
             if (!isMove && !isAttackNow) { NormalAttack(); }
             if (!isAttackNow) { LookMoveDirection(); } // ¿òÁ÷ÀÓ
         }
-       
+
+
+        /*
+        if (!agent.enabled)
+        {
+            agent.enabled = true;
+        }
+        */
+
     }
 
     private void ClearNav()

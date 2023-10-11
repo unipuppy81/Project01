@@ -443,10 +443,12 @@ MonoBehaviour:
   isNewState: 0
   AttackEffect:
   - {fileID: 100010, guid: 1a04cb529b7cfe844a146801faabb1e5, type: 3}
+  agent: {fileID: 0}
+  canGame: 0
   bullet: {fileID: 7375395205466429629, guid: 3efd8607be583074297ee975b5363d10, type: 3}
   bulletPos: {fileID: 304270401617600307}
   target: {fileID: 0}
-  attack01Bullet: {fileID: 9043831529998700984, guid: 07795a6660ef5c44a958707f06116a4f, type: 3}
+  attack01Bullet: {fileID: 6723012044458931910, guid: b2df576ee1d7aab4ba15c8b292522682, type: 3}
   playerAttackRange: 10
 --- !u!54 &1004667127783340375
 Rigidbody:

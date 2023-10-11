@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+
 
 public class EnemyBase : MonoBehaviour
 {
     public float detectionRadius = 5.0f;
-
-    public bool isNavMesh = false;
+    public float enemySpeed = 3.0f;
     public bool isDragging;
+    public bool isDetect;
+
 
     public Vector3 DragPosition;
+    public GameObject playerObj;
+
     Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerObj = GameObject.Find("Player01");
     }
 
     void Update()
@@ -25,6 +28,7 @@ public class EnemyBase : MonoBehaviour
         if (isDead()) return;
 
         PlayerDetection();
+        if (isDetect && !isDragging) { chaseTarget(); }
 
         if (isDragging)
         {
@@ -32,11 +36,13 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    /*
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, detectionRadius);
     }
+    */
 
     public void PlayerDetection()
     {
@@ -49,28 +55,21 @@ public class EnemyBase : MonoBehaviour
             {
                 if (collider.CompareTag("Player")) // 플레이어 태그가 적절한 경우
                 {
-                    isNavMesh = true;
+                    isDetect = true;
+                    
 
                     // 감지된 플레이어와의 상호작용 코드를 작성합니다.
                     Debug.Log("플레이어 감지됨!");
                 }
             }   
         }
-
-
-
-
-
-
     }
 
-    public void GetDamage()
+    void chaseTarget()
     {
-
-
-
-
+        Vector3 nVec = new Vector3(playerObj.transform.position.x, transform.position.y, playerObj.transform.position.z);
+        transform.LookAt(nVec);
+        transform.Translate(Vector3.forward * Time.deltaTime * enemySpeed);
     }
-
     public bool isDead() { return false; }
 }

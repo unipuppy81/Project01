@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3153950157771367378}
   - component: {fileID: 3153950157771367379}
   - component: {fileID: 42221134839533039}
+  - component: {fileID: 2536606343262285867}
   m_Layer: 9
   m_Name: Enemy2
   m_TagString: Enemy
@@ -128,5 +129,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea416eb212d872479de08c6843cc717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 5
+  enemySpeed: 3
   isDragging: 0
+  isDetect: 0
   DragPosition: {x: 0, y: 0, z: 0}
+  playerObj: {fileID: 0}
+--- !u!114 &2536606343262285867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153950157771367376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ec798179d2cbd47b898dafd643da61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 5
+  enemySpeed: 3
+  isDragging: 0
+  isDetect: 0
+  DragPosition: {x: 0, y: 0, z: 0}
+  playerObj: {fileID: 0}
+  coin: {fileID: 328572394031864372, guid: cc271504e77771247a8219aa636c13cf, type: 3}
+  isDie: 0
+  curHP: 0
+  maxHP: 10

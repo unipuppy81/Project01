@@ -9,6 +9,8 @@ TagManager:
   - FxTemporaire
   - pyramid
   - plane
+  - Bullet
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Bullet
+  - Bomb
   - 
   - Enemy
   - NavMeshLayer
