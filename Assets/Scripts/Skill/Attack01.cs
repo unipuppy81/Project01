@@ -8,10 +8,7 @@ public class Attack01 : MonoBehaviour
 
     [SerializeField] private GameObject Effect;
 
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)

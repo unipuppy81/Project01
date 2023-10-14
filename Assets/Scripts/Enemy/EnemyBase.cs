@@ -12,15 +12,22 @@ public class EnemyBase : MonoBehaviour
     public bool isDragging;
     public bool isDetect;
 
+    [Header("Drag")]
+    float timer = 0.0f;
+    float timer2 = 0.0f;
+    float dragDamage = 1.0f;
 
     public Vector3 DragPosition;
     public GameObject playerObj;
+
+    EnemyHealth enemyH;
 
     Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerObj = GameObject.Find("Player01");
+        enemyH = GetComponent<EnemyHealth>();
     }
 
     void Update()
@@ -33,6 +40,19 @@ public class EnemyBase : MonoBehaviour
         if (isDragging)
         {
             rb.MovePosition(Vector3.Lerp(transform.position, DragPosition, Time.deltaTime * 1.0f));
+            DragDamage();
+        }
+    }
+
+    void DragDamage()
+    {
+        float interval = 1.0f;
+        timer2 += Time.deltaTime;
+
+        if (timer2 >= interval)
+        {
+            enemyH.GetDamage(dragDamage);
+            timer2 = 0.0f;
         }
     }
 
@@ -43,6 +63,11 @@ public class EnemyBase : MonoBehaviour
         Gizmos.DrawSphere(transform.position, detectionRadius);
     }
     */
+
+    private void OnParticleCollision()
+    {
+        enemyH.GetDamage(0.01f);
+    }
 
     public void PlayerDetection()
     {
