@@ -11,6 +11,7 @@ TagManager:
   - plane
   - Bullet
   - Bomb
+  - FieldItem
   layers:
   - Default
   - TransparentFX
