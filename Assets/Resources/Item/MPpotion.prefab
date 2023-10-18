@@ -114,7 +114,7 @@ MonoBehaviour:
   item:
     itemType: 1
     itemName: MPpotion
-    itemImage: {fileID: 21300038, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+    itemImage: {fileID: 21300000, guid: 0bc84c9f5cbecce4ba93cf4ee2e90697, type: 3}
     itemObj: {fileID: 6577775859962696721}
     efts:
-    - {fileID: 11400000, guid: a36643f2cb2e46340b40ec60e9d3a559, type: 2}
+    - {fileID: 11400000, guid: 1f1ea9972ede880489221a63afa33868, type: 2}
