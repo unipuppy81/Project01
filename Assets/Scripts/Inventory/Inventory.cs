@@ -68,7 +68,8 @@ public class Inventory : MonoBehaviour
         if (col.CompareTag("FieldItem"))
         {
             FieldItem fieldItem = col.GetComponent<FieldItem>();
-            if (AddItem(fieldItem.GetItem())){
+            if (AddItem(fieldItem.GetItem()))
+            {
                 fieldItem.DestroyItem();
             }
         }

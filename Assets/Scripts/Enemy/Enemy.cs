@@ -21,24 +21,15 @@ public class Enemy : EnemyBase
 
     void DieNow()
     {
-        Instantiate(coin, transform.position, transform.rotation);
+        Vector3 coinPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+
+
+        Instantiate(coin, coinPos, transform.rotation);
      
         Destroy(this.gameObject);       
     }
     public void GetDamage()
     {
 
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Bullet")
-        {
-
-        }   
-        else if(other.tag == "Bomb")
-        {
-
-        }
     }
 }

@@ -16,10 +16,10 @@ public class Bullet : Skill
 
     public bool isAlive = false;
 
-
+    public float damage;
     void Start()
     {
-
+        damage = 4.0f;
     }
 
     // Update is called once per frame
@@ -54,8 +54,6 @@ public class Bullet : Skill
             enemy.GetDamage(4.0f);
             Instantiate(NormalEffect, transform.position, transform.rotation);
 
-
-            Damage = 4.0f;
 
 
 

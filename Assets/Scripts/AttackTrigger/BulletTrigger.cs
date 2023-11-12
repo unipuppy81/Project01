@@ -18,8 +18,6 @@ public class BulletTrigger : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
             IsAttack = true;
-            Enemy enemy = other.GetComponent<Enemy>();
-            enemy.GetDamage();
 
     }
 

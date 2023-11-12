@@ -151,12 +151,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d84d8b50c72e040ba3bceaf1175c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
+  slotNum: 0
+  item_f:
     itemType: 0
     itemName: 
     itemImage: {fileID: 0}
     itemObj: {fileID: 0}
+    efts: []
   itemIcon: {fileID: 2567066176699647031}
+  itemPro:
+    name: 
+    sprite: {fileID: 0}
+  image_s: {fileID: 0}
 --- !u!1 &2567066176699647029
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,20 +21,20 @@ public class EnemyBase : MonoBehaviour
     public Vector3 DragPosition;
     public GameObject playerObj;
 
+    Animator anim;
     EnemyHealth enemyH;
-
     Rigidbody rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerObj = GameObject.Find("Player01");
         enemyH = GetComponent<EnemyHealth>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        if (isDead()) return;
-
         PlayerDetection();
         if (isDetect && !isDragging) { chaseTarget(); }
 
@@ -66,7 +67,7 @@ public class EnemyBase : MonoBehaviour
 
     private void OnParticleCollision()
     {
-        enemyH.GetDamage(0.01f);
+        enemyH.GetDamage(0.03f);
     }
 
     public void PlayerDetection()
@@ -95,6 +96,7 @@ public class EnemyBase : MonoBehaviour
         Vector3 nVec = new Vector3(playerObj.transform.position.x, transform.position.y, playerObj.transform.position.z);
         transform.LookAt(nVec);
         transform.Translate(Vector3.forward * Time.deltaTime * enemySpeed);
+
+        anim.SetBool("isWalk", true);
     }
-    public bool isDead() { return false; }
 }

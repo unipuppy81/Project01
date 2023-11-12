@@ -15,6 +15,8 @@ public enum AttackType
 public class Skill : MonoBehaviour
 {
     Player player;
+    PlayerHealth pHealth;
+    PlayerMana pMana;
     PlayerCursor playerCursor;
 
     private float rotateSpeed = 1.0f;
@@ -32,7 +34,17 @@ public class Skill : MonoBehaviour
     [SerializeField] GameObject attack01PosBox;
     [SerializeField] GameObject attack01 = null;
     [SerializeField] Transform[] attack01Pos;
+    public Image skill01CoolTimeImage;
+    private GameObject skill01GameObject;
 
+
+
+
+    public float coolTimeSkill01 = 5.0f;
+    [SerializeField] private float nowSkill01Cool = 0.0f;
+    public bool isSkill01Cool = false;
+
+    public float consume01Mana; // 10.0f;
 
 
     int spawnAttack = 9;
@@ -41,6 +53,18 @@ public class Skill : MonoBehaviour
 
     [SerializeField] GameObject attack02Effect = null;
     [SerializeField] GameObject fireBase = null;
+    public Image skill02CoolTimeImage;
+    private GameObject skill02GameObject;
+
+
+
+    public float coolTimeSkill02 = 5.0f;
+    [SerializeField] private float nowSkill02Cool = 0.0f;
+    public bool isSkill02Cool = false;
+
+
+    [SerializeField] float consume02Mana; // 15.0f;
+
 
 
 
@@ -48,12 +72,23 @@ public class Skill : MonoBehaviour
 
     [SerializeField] GameObject dragObject = null;
     public bool isClick03 = false;
+    public Image skill03CoolTimeImage;
+    private GameObject skill03GameObject;
+
+
+
+    public float coolTimeSkill03 = 5.0f;
+    [SerializeField] private float nowSkill03Cool = 0.0f;
+    public bool isSkill03Cool = false;
+
+
+    [SerializeField] float consume03Mana; // 20.0f;
+
+
 
     [Header("SkillJump")]
-    [SerializeField] private GameObject JumpEffect;
+    [SerializeField] private GameObject JumpEffect; 
     float timer = 0.0f;
-
-
 
 
 
@@ -62,16 +97,29 @@ public class Skill : MonoBehaviour
         attack01Pos = attack01PosBox.transform.GetComponentsInChildren<Transform>();
         player = GetComponent<Player>();
         playerCursor =  GetComponent<PlayerCursor>();
+        pHealth = GetComponent<PlayerHealth>();
+        pMana = GetComponent<PlayerMana>();
+
+
+        skill01GameObject = GameObject.Find("SkillQImage");
+        skill02GameObject = GameObject.Find("SkillWImage");
+        skill03GameObject = GameObject.Find("SkillEImage");
+        skill01CoolTimeImage = skill01GameObject.GetComponent<Image>();
+        skill02CoolTimeImage = skill02GameObject.GetComponent<Image>();
+        skill03CoolTimeImage = skill03GameObject.GetComponent<Image>();
+
+
     }
 
     void Update()
     {
-        if (isMouseBtn1) { Attack01Skill(); }
-        if (isMouseBtn2) { Attack02Skill(); }
-        if (isMouseBtn3) { Attack03Skill(); }
-        if (isMouseBtn4) { JumpAttack(); }
+        SkillCoolTime();
+        SkillSet();
     }
 
+
+
+    /* =========================================== 스킬 ============================================= */
     public void Attack01Skill()
     {
             playerCursor.cursor01Changed = true;
@@ -121,11 +169,11 @@ public class Skill : MonoBehaviour
 
                 // 종료
                 isMouseBtn1 = false;
+                isSkill01Cool = true;
                 playerCursor.cursor01Changed = false;
-            }
+                pMana.ConsumeMP(consume01Mana);
+        }
     }
-
-
 
     public void Attack02Skill()
     {
@@ -180,9 +228,12 @@ public class Skill : MonoBehaviour
 
             // 종료
             isMouseBtn2 = false;
+            isSkill02Cool = true;
             playerCursor.cursor02Changed = false;
+            pMana.ConsumeMP(consume02Mana);
         }
-        
+
+      
     }
 
     public void Attack03Skill()
@@ -217,9 +268,12 @@ public class Skill : MonoBehaviour
 
             // 종료
             isMouseBtn3 = false;
+            isSkill03Cool = true;
             playerCursor.cursor01Changed = false;
+            pMana.ConsumeMP(consume03Mana);
         }
 
+       
     }
 
     public void JumpAttack()
@@ -237,16 +291,65 @@ public class Skill : MonoBehaviour
          
     }
 
+    public void SkillSet()
+    {
+        if (isMouseBtn1 && !isSkill01Cool) { Attack01Skill(); }
+        if (isMouseBtn2 && !isSkill02Cool) { Attack02Skill(); }
+        if (isMouseBtn3 && !isSkill03Cool) { Attack03Skill(); }
+        if (isMouseBtn4) { JumpAttack(); }
+    }
 
 
+    /* =========================================== 스킬 쿨타임 ============================================= */
+
+    public void Skill01CoolTime()
+    {
+        nowSkill01Cool += Time.deltaTime;
+
+        skill01CoolTimeImage.fillAmount = nowSkill01Cool/coolTimeSkill01;
+
+        if (coolTimeSkill01 <= nowSkill01Cool)
+        {
+            isSkill01Cool = false;
+            nowSkill01Cool = 0.0f;
+            skill01CoolTimeImage.fillAmount = 1.0f;
+        }
+    }
+
+    public void Skill02CoolTime()
+    {
+        nowSkill02Cool += Time.deltaTime;
+
+        skill02CoolTimeImage.fillAmount = nowSkill02Cool / coolTimeSkill02;
 
 
+        if (coolTimeSkill02 <= nowSkill02Cool)
+        {
+            isSkill02Cool = false;
+            nowSkill02Cool = 0.0f;
+            skill02CoolTimeImage.fillAmount = 1.0f;
+        }
+    }
 
 
+    public void Skill03CoolTime()
+    {
+        nowSkill03Cool += Time.deltaTime;
+        skill03CoolTimeImage.fillAmount = nowSkill03Cool / coolTimeSkill03;
+        if (coolTimeSkill03 <= nowSkill03Cool)
+        {
+            isSkill03Cool = false;
+            nowSkill03Cool = 0.0f;
+            skill03CoolTimeImage.fillAmount = 1.0f;
+        }
+    }
 
-
-
-
+    public void SkillCoolTime()
+    {
+        if (isSkill01Cool) { Skill01CoolTime(); }
+        if (isSkill02Cool) { Skill02CoolTime(); }
+        if (isSkill03Cool) { Skill03CoolTime(); }
+    }
 
 
     /////////////////////////////////////////////// Ex ///////////////////////////////////////////////////

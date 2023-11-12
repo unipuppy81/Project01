@@ -35,6 +35,7 @@ public class DragEnemy : MonoBehaviour
 
             if (col.tag == "Enemy")
             {
+                Debug.Log("Drag");
                 col.gameObject.GetComponent<EnemyBase>().isDragging = true;
                 col.gameObject.GetComponent<EnemyBase>().DragPosition = this.transform.position;
             }

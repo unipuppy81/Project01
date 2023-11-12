@@ -50,8 +50,8 @@ public class UIManager : MonoBehaviour
     public void AddSlot()
     {
         inven.SlotCnt++;
-
     }
+
     void RedrawSlotUI()
     {
         for(int i = 0; i < slots.Length; i++)
@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
         }
         for(int i =0; i<inven.items.Count; i++)
         {
-            slots[i].item =inven.items[i];
+            slots[i].item_f =inven.items[i];
             slots[i].UpDateSlotUI();
         }
     }

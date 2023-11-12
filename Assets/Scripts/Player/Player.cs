@@ -79,19 +79,18 @@ public class Player : PlayerBase
     private void InputSkillBtn()
     {
 
-        if (Input.GetKeyDown(KeyCode.Q) && !isMove && !isAttackNow)
+        if (Input.GetKeyDown(KeyCode.Q) && !isMove && !isAttackNow && !skill.isSkill01Cool)
         {
             isAttackNow = true;
-            skill.isMouseBtn1 = true;
-            
+            skill.isMouseBtn1 = true; 
         }
-        else if (Input.GetKeyDown(KeyCode.W) && !isMove && !isAttackNow)
+        else if (Input.GetKeyDown(KeyCode.W) && !isMove && !isAttackNow && !skill.isSkill02Cool)
         {
             isAttackNow = true;
             skill.isMouseBtn2 = true;
 
         }
-        else if (Input.GetKeyDown(KeyCode.E) && !isMove && !isAttackNow)
+        else if (Input.GetKeyDown(KeyCode.E) && !isMove && !isAttackNow && !skill.isSkill03Cool)
         {
             isAttackNow = true;
             skill.isMouseBtn3 = true;
