@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StoreManager : MonoBehaviour
 {
+    private InventoryController inventory;
     public ItemBuffer itemBuffer;
     public Transform slotRoot;
 
@@ -12,6 +13,8 @@ public class StoreManager : MonoBehaviour
     public System.Action<ItemProperty> onSlotClick;
     void Start()
     {
+        inventory = FindObjectOfType<InventoryController>();
+
         slots = new List<StoreSlot>();
 
         int slotCnt = slotRoot.childCount;
@@ -35,12 +38,6 @@ public class StoreManager : MonoBehaviour
         onSlotClick += OnClickSlotEx;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnClickSlotEx(ItemProperty prop)
     {
 
@@ -54,5 +51,29 @@ public class StoreManager : MonoBehaviour
         }
 
         Debug.Log(slot.name);
+    }
+
+    public void GetItem()
+    {
+       /* for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 2)
+            {
+                if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName)
+                {
+                    Destroy(gameObject);
+                    inventory.slots[i].GetComponent<SlotR>().amount += 1;
+                    break;
+                }
+            }
+            else if (inventory.isFull[i] == false)
+            {
+                inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform, false);
+                inventory.slots[i].GetComponent<SlotR>().amount += 1;
+                Destroy(gameObject);
+                break;
+            }
+        }*/
     }
 }

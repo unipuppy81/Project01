@@ -8,7 +8,7 @@ public class Inventory_ : MonoBehaviour
     public Transform rootSlot;
     public StoreManager store;
 
-    private List<StoreSlot> slots;
+    public List<StoreSlot> slots;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +40,7 @@ public class Inventory_ : MonoBehaviour
 
     }
 
-    void SortList(List<StoreSlot> list)
+    public void SortList(List<StoreSlot> list)
     {
         list.Sort();
     }

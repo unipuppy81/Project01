@@ -12,9 +12,16 @@ public class StoreSlot : MonoBehaviour
     public Button sellBtn;
 
 
+    public Inventory_ inven_;
+
     private void Awake()
     {
         SetSellBtnInteractable(false);
+    }
+
+    private void Start()
+    {
+        inven_ = GetComponent<Inventory_>();
     }
 
     void SetSellBtnInteractable(bool b)
