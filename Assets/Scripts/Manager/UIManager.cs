@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class UIManager : MonoBehaviour
 
     public InvenSlot[] slots;
     public Transform slotHolder;
+
+
+    [Header("Coin")]
+
+    public TextMeshProUGUI coinText;
+    public string coinString;
+    [SerializeField] private GameObject coinErrorPanel;
+    
+
     private void Start()
     {
         inven = Inventory.instance;
@@ -25,6 +35,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        coinToString(PlayerGold.nowGold);
         if (Input.GetKeyDown(KeyCode.I))
         {
             activeInventory = !activeInventory;
@@ -65,4 +76,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    void coinToString(int coin)
+    {
+        coinString = coin.ToString();
+        coinText.text = coinString;
+    }
+
+    public void coinErrorExit()
+    {
+        coinErrorPanel.SetActive(false);
+    }
 }

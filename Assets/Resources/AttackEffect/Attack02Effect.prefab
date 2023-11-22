@@ -3753,16 +3753,16 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 2
-    inside: 1
+    inside: 2
     outside: 0
     enter: 0
     exit: 0
-    colliderQueryMode: 0
+    colliderQueryMode: 2
     radiusScale: 1
     primitives:
-    - {fileID: 0}
+    - {fileID: 6701869415353613694, guid: 1d170517ac025e347a2239954a1ff36d, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -3774,8 +3774,8 @@ ParticleSystem:
     subEmitters:
     - serializedVersion: 3
       emitter: {fileID: 0}
-      type: 0
-      properties: 0
+      type: 1
+      properties: -1
       emitProbability: 1
   LightsModule:
     enabled: 0

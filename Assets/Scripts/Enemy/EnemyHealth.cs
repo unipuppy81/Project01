@@ -21,6 +21,7 @@ public class EnemyHealth : Enemy
 
     public void GetDamage(float damage)
     {
+        if(curHP > 0) { 
         curHP -= damage;
 
         if (IsDeath()) {
@@ -29,6 +30,11 @@ public class EnemyHealth : Enemy
         }
 
         StartCoroutine(OnDamage());
+        }
+        else
+        {
+            curHP = 0.0f;
+        }
     }
 
     public void RecoveryHP(float hp)

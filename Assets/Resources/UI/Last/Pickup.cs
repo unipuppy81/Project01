@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
@@ -8,33 +10,52 @@ public class Pickup : MonoBehaviour
     public GameObject itemButton;
     public string itemName;
 
+    public GameObject coinError;
+    public ConsumeItemType consumeType;
+    public int potionCost;
+
     void Start()
     {
         inventory = FindObjectOfType<InventoryController>();    
+
+        if(consumeType == ConsumeItemType.HealthPotion)
+        {
+            potionCost = 1000;
+        }
+        else if(consumeType == ConsumeItemType.ManaPotion)
+        {
+            potionCost = 500;
+        }
     }
 
     public void GetItem()
     {
-        for (int i = 0; i < inventory.slots.Length; i++)
+        if(PlayerGold.nowGold < potionCost) 
         {
-            if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 9)
+            Debug.Log("Error");
+            //coinError.SetActive(true);
+        }
+        else if(PlayerGold.nowGold > potionCost)
+        { 
+            for (int i = 0; i < inventory.slots.Length; i++)
             {
-                if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName)
+                if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 9)
                 {
-                    //Destroy(gameObject);
+                    if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName)
+                    {
+                        inventory.slots[i].GetComponent<SlotR>().amount += 1;
+                        break;
+                    }
+                }
+                else if (inventory.isFull[i] == false)
+                {
+                    inventory.isFull[i] = true;
+                    Instantiate(itemButton, inventory.slots[i].transform, false);
                     inventory.slots[i].GetComponent<SlotR>().amount += 1;
                     break;
                 }
             }
-            else if (inventory.isFull[i] == false)
-            {
-                inventory.isFull[i] = true;
-                Instantiate(itemButton, inventory.slots[i].transform, false);
-                inventory.slots[i].GetComponent<SlotR>().amount += 1;
-                //Destroy(gameObject);
-                break;
-            }
-        } 
+        }
     }
 
     private void OnTriggerEnter(Collider other)

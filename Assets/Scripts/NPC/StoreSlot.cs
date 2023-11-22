@@ -14,6 +14,8 @@ public class StoreSlot : MonoBehaviour
 
     public Inventory_ inven_;
 
+    public ConsumeItemType consumeType;
+
     private void Awake()
     {
         SetSellBtnInteractable(false);

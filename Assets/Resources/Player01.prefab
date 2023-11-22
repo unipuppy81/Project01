@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 1881900309192932485}
   - component: {fileID: -8189197818276799816}
   - component: {fileID: -17382741583453306}
+  - component: {fileID: 5261761249370360524}
   - component: {fileID: -7200559392243900872}
   - component: {fileID: 8705924740211454077}
   - component: {fileID: -7145207891683763906}
@@ -514,18 +515,21 @@ MonoBehaviour:
   coolTimeSkill01: 5
   nowSkill01Cool: 0
   isSkill01Cool: 0
+  consume01Mana: 0
   attack02Effect: {fileID: 8764043878647920493, guid: a257a46a6c55cf744b563876b45bc5d6, type: 3}
   fireBase: {fileID: 5128587551486556188, guid: 34d82e41a7208354fa129125dfffa716, type: 3}
   skill02CoolTimeImage: {fileID: 0}
   coolTimeSkill02: 5
   nowSkill02Cool: 0
   isSkill02Cool: 0
+  consume02Mana: 0
   dragObject: {fileID: 5510439212516439278, guid: 00bd4fcaf2482b1468e1a503bd2574b1, type: 3}
   isClick03: 0
   skill03CoolTimeImage: {fileID: 0}
   coolTimeSkill03: 5
   nowSkill03Cool: 0
   isSkill03Cool: 0
+  consume03Mana: 0
   JumpEffect: {fileID: 7226888052703040409, guid: 5bd94ee6b6c94fb49ac41d761fb3e13d, type: 3}
 --- !u!114 &1881900309192932485
 MonoBehaviour:
@@ -557,8 +561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefe87c458f430b4ba8d05b1b817abbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manaSlider: {fileID: 0}
   currentMP: 0
   maxMP: 0
+  textMP: {fileID: 0}
 --- !u!114 &-17382741583453306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,8 +577,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b35686a44a4bb4db6bba22304d146a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
   currentHP: 0
   maxHP: 0
+  textHP: {fileID: 0}
+--- !u!114 &5261761249370360524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872774549440857453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf3cc423e4c1f747a3ab8d4f4113fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowGold: 0
 --- !u!114 &-7200559392243900872
 MonoBehaviour:
   m_ObjectHideFlags: 0

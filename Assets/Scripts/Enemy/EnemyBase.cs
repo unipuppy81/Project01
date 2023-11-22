@@ -21,6 +21,7 @@ public class EnemyBase : MonoBehaviour
     public Vector3 DragPosition;
     public GameObject playerObj;
 
+
     Animator anim;
     EnemyHealth enemyH;
     Rigidbody rb;
@@ -65,9 +66,12 @@ public class EnemyBase : MonoBehaviour
     }
     */
 
-    private void OnParticleCollision()
+    void OnParticleCollision( )
     {
-        enemyH.GetDamage(0.03f);
+        if(enemyH != null) 
+        {
+            enemyH.GetDamage(0.03f);
+        }
     }
 
     public void PlayerDetection()
