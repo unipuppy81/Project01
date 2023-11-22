@@ -17,7 +17,7 @@ public class Pickup : MonoBehaviour
     {
         for (int i = 0; i < inventory.slots.Length; i++)
         {
-            if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 2)
+            if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 9)
             {
                 if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName)
                 {

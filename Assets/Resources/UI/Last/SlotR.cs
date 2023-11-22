@@ -20,7 +20,7 @@ public class SlotR : MonoBehaviour
     {
         amountText.text = amount.ToString();
 
-        if(transform.childCount == 2)
+        if(transform.childCount == 5)
         {
             inventory.isFull[i] = false;
         }
