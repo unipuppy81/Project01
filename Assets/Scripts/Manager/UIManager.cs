@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     {
         inven = Inventory.instance;
         slots = slotHolder.GetComponentsInChildren<InvenSlot>();
+        coinErrorPanel = GameObject.Find("StoreUI").transform.Find("ErrorPanel").gameObject;
         inven.onSlotCountChange += SlotChange;
         inven.onChangeItem += RedrawSlotUI;
         inventoryPanel.SetActive(activeInventory);
@@ -86,5 +87,10 @@ public class UIManager : MonoBehaviour
     public void coinErrorExit()
     {
         coinErrorPanel.SetActive(false);
+    }
+
+    public void coinErrorEnter()
+    {
+        coinErrorPanel.SetActive(true);
     }
 }

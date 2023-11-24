@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    UIManager uiManager;
     private InventoryController inventory;
     public GameObject itemButton;
     public string itemName;
@@ -16,8 +17,8 @@ public class Pickup : MonoBehaviour
 
     void Start()
     {
-        inventory = FindObjectOfType<InventoryController>();    
-
+        inventory = FindObjectOfType<InventoryController>();
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         if(consumeType == ConsumeItemType.HealthPotion)
         {
             potionCost = 1000;
@@ -33,7 +34,7 @@ public class Pickup : MonoBehaviour
         if(PlayerGold.nowGold < potionCost) 
         {
             Debug.Log("Error");
-            //coinError.SetActive(true);
+            uiManager.coinErrorEnter();
         }
         else if(PlayerGold.nowGold > potionCost)
         { 
