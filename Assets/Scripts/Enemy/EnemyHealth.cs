@@ -8,11 +8,10 @@ public class EnemyHealth : Enemy
     public float curHP;
     public float maxHP = 10.0f;
 
-    Material mat;
-
+    Animator anim2;
     void Start()
     {
-        mat = GetComponentInChildren<MeshRenderer>().material;
+        anim2 = GetComponentInChildren<Animator>();
     }
     void Awake()
     {
@@ -54,9 +53,10 @@ public class EnemyHealth : Enemy
 
     IEnumerator OnDamage()
     {
-        mat.color = Color.red;
+        anim2.SetBool("isDamage", true);
+
         yield return new WaitForSeconds(0.25f);
 
-        mat.color = Color.white;
+        anim2.SetBool("isDamage", false);
     }
 }
