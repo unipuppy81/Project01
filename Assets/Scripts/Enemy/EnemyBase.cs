@@ -25,6 +25,7 @@ public class EnemyBase : MonoBehaviour
     Animator anim;
     EnemyHealth enemyH;
     Rigidbody rb;
+    Player player;
 
     void Start()
     {
@@ -32,12 +33,13 @@ public class EnemyBase : MonoBehaviour
         playerObj = GameObject.Find("Player01");
         enemyH = GetComponent<EnemyHealth>();
         anim = GetComponentInChildren<Animator>();
+        player = playerObj.GetComponent<Player>();
     }
 
     void Update()
     {
         PlayerDetection();
-        if (isDetect && !isDragging) { chaseTarget(); }
+        if (isDetect && !isDragging && !player.isDamage) { chaseTarget(); }
 
         if (isDragging)
         {
@@ -103,4 +105,10 @@ public class EnemyBase : MonoBehaviour
 
         anim.SetBool("isWalk", true);
     }
+
+    // ================================= ÄÚ·çÆ¾ =========================================== //
+
+
+
+
 }

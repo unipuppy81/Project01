@@ -13,12 +13,13 @@ public class Player : PlayerBase
     private Camera camera;
     public NavMeshAgent agent;
     private Skill skill;
-
+    //MeshRenderer[] meshs;
 
     public bool canGame = false;
     private bool isMove;
     private bool isAttackNow;
     private bool canAttack;
+    public bool isDamage;
     private Vector3 destination;
 
 
@@ -36,7 +37,7 @@ public class Player : PlayerBase
         camera = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         skill = GetComponent<Skill>();
-
+        //meshs = GetComponentsInChildren<MeshRenderer>();
 
     }
 
@@ -67,6 +68,8 @@ public class Player : PlayerBase
 
     }
 
+
+    // navigation
     private void ClearNav()
     {
 
@@ -76,9 +79,10 @@ public class Player : PlayerBase
         canGame = true;
     }
    
+
+    // 키 조절
     private void InputSkillBtn()
     {
-
         if (Input.GetKeyDown(KeyCode.Q) && !isMove && !isAttackNow && !skill.isSkill01Cool)
         {
             isAttackNow = true;
@@ -107,6 +111,56 @@ public class Player : PlayerBase
         
     }
 
+    // 움직임
+    public void LookMoveDirection()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+
+                if (hit.transform.gameObject.CompareTag("Ground")) { SetDestination(hit.point); }
+
+            }
+        }
+
+        if (isMove)
+        {
+            if (agent.velocity.magnitude <= 0.2f)
+            {
+                isMove = false;
+
+                return;
+            }
+
+            var dir = new Vector3(agent.steeringTarget.x, transform.position.y, agent.steeringTarget.z) - transform.position;
+            transform.forward = dir;
+            transform.position += dir.normalized * Time.deltaTime * 5.0f;
+            // Time.deltaTime == 게임의 프레임 속도에 영향 받지 않게 해줌
+        }
+    }
+
+    private void SetDestination(Vector3 hit)
+    {
+        agent.SetDestination(hit);
+        destination = hit;
+        isMove = true;
+        SetState(CH_STATE.BattleRunForward);
+    }
+
+    private void MoveStop()
+    {
+        agent.SetDestination(transform.position);
+        destination = transform.position;
+        isMove = false;
+        SetState(CH_STATE.Idle);
+    }
+
+
+
+
+    // 공격
     private void NormalAttack()
     {
         if (Input.GetMouseButtonDown(1))
@@ -180,53 +234,25 @@ public class Player : PlayerBase
         }
     }
 
-    public void LookMoveDirection()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
-            {
 
-                if (hit.transform.gameObject.CompareTag("Ground")){ SetDestination(hit.point); }
- 
+    // Trigger
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "EnemyBullet")
+        {
+            if (!isDamage) { 
+            Bullet enemyBullet = other.GetComponent<Bullet>();
+            PlayerHealth playerH = this.GetComponent<PlayerHealth>();
+
+            playerH.GetDamage(10.0f);
+
             }
         }
-
-        if (isMove)
-        {
-            if (agent.velocity.magnitude <= 0.2f)
-            {
-                isMove = false;
-                
-                return;
-            }
-
-            var dir = new Vector3(agent.steeringTarget.x, transform.position.y, agent.steeringTarget.z) - transform.position;
-            transform.forward = dir;
-            transform.position += dir.normalized * Time.deltaTime * 5.0f;
-            // Time.deltaTime == 게임의 프레임 속도에 영향 받지 않게 해줌
-        }
     }
 
 
-    private void SetDestination(Vector3 hit)
-    {
-        agent.SetDestination(hit);
-        destination = hit;
-        isMove = true;
-        SetState(CH_STATE.BattleRunForward);
-    }
-
-    private void MoveStop()
-    {
-        agent.SetDestination(transform.position);
-        destination = transform.position;
-        isMove = false;
-        SetState(CH_STATE.Idle);
-    }
-
-
+    // 상태
     private void SetStateNormal()
     {
         if (skill.isMouseBtn1) { skill.isMouseBtn1 = false; }
@@ -395,5 +421,18 @@ public class Player : PlayerBase
             }
 
         } while (!isNewState);
+    }
+
+
+
+    // Ondamage
+
+    protected virtual IEnumerator OnDamage()
+    {
+        isDamage = true;
+
+        yield return new WaitForSeconds(1f);
+        
+        isDamage = false;
     }
 }

@@ -12,6 +12,11 @@ public class PlayerHealth : MonoBehaviour
 
     public TextMeshProUGUI textHP;
 
+
+    private void Awake()
+    {
+        maxHP = 100.0f;
+    }
     private void Start()
     {
         currentHP = maxHP;

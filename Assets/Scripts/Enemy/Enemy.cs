@@ -7,9 +7,11 @@ public class Enemy : EnemyBase
 
     [SerializeField] GameObject coin;
     public bool isDie;
+    public float damage;
     // Start is called before the first frame update
     void Awake()
     {
+        damage = 10.0f;
         isDie = false;
     }
 
@@ -17,7 +19,6 @@ public class Enemy : EnemyBase
     {
         if (isDie) { DieNow(); }
     }
-
 
     void DieNow()
     {
@@ -27,9 +28,5 @@ public class Enemy : EnemyBase
         Instantiate(coin, coinPos, transform.rotation);
      
         Destroy(this.gameObject);       
-    }
-    public void GetDamage()
-    {
-
     }
 }
