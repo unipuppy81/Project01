@@ -7,11 +7,12 @@ public class EnemyHealth : Enemy
 {
     public float curHP;
     public float maxHP = 10.0f;
+    EnemyBase eb;
 
-    Animator anim2;
     void Start()
     {
-        anim2 = GetComponentInChildren<Animator>();
+        eb = GetComponent<EnemyBase>();
+        //anim2 = GetComponentInChildren<Animator>();
     }
     void Awake()
     {
@@ -28,7 +29,7 @@ public class EnemyHealth : Enemy
             isDie = true;
         }
 
-        StartCoroutine(OnDamage());
+        StartCoroutine(eb.OnDamage());
         }
         else
         {
@@ -49,14 +50,4 @@ public class EnemyHealth : Enemy
 
     public float RemainingAmount() { return Mathf.Clamp01(curHP / maxHP); }
 
-
-
-    IEnumerator OnDamage()
-    {
-        anim2.SetBool("isDamage", true);
-
-        yield return new WaitForSeconds(0.25f);
-
-        anim2.SetBool("isDamage", false);
-    }
 }

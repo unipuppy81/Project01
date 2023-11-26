@@ -244,7 +244,7 @@ public class Player : PlayerBase
             if (!isDamage) { 
             Bullet enemyBullet = other.GetComponent<Bullet>();
             PlayerHealth playerH = this.GetComponent<PlayerHealth>();
-
+                StartCoroutine(OnDamage());
             playerH.GetDamage(10.0f);
 
             }
@@ -431,7 +431,7 @@ public class Player : PlayerBase
     {
         isDamage = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         
         isDamage = false;
     }

@@ -46,8 +46,18 @@ public class EnemyBase : MonoBehaviour
             rb.MovePosition(Vector3.Lerp(transform.position, DragPosition, Time.deltaTime * 1.0f));
             DragDamage();
         }
+
+        if (player.isDamage) 
+        {
+            StartCoroutine(Attack());
+            SetAnimBool();
+        }
     }
 
+    void SetAnimBool()
+    {
+
+    }
     void DragDamage()
     {
         float interval = 1.0f;
@@ -108,7 +118,23 @@ public class EnemyBase : MonoBehaviour
 
     // ================================= ÄÚ·çÆ¾ =========================================== //
 
+    public IEnumerator OnDamage()
+    {
+        anim.SetBool("isDamage", true);
 
+        yield return new WaitForSeconds(0.25f);
 
+        anim.SetBool("isDamage", false);
+    }
 
+    public IEnumerator Attack()
+    {
+        anim.SetBool("isWalk", false);
+        anim.SetBool("isAttack", true);
+
+        yield return new WaitForSeconds(.5f);
+
+        anim.SetBool("isAttack", false);
+        anim.SetBool("isWalk", true);
+    }
 }

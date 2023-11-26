@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea416eb212d872479de08c6843cc717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
+  detectionRadius: 10
   enemySpeed: 3
   isDragging: 0
   isDetect: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ec798179d2cbd47b898dafd643da61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
+  detectionRadius: 10
   enemySpeed: 3
   isDragging: 0
   isDetect: 0
