@@ -36,19 +36,9 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerGold playerG = other.GetComponent<PlayerGold>();
-
-            Debug.Log("Coin Player");
-
-            if(playerG != null) 
-            { 
-                PlayerGold.nowGold += coinValue;
-                Debug.Log("Coin Player2");
-                Destroy(this.gameObject);
-            }
-
-
-
+            DataManager.Instance.pData.gold += coinValue;
+            DataManager.Instance.SaveGameData();
+            Destroy(this.gameObject);
         }
     }
 }

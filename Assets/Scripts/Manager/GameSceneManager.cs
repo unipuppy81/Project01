@@ -37,7 +37,7 @@ public class GameSceneManager : SingletonType<GameSceneManager>
     }
     private void Init()
     {
-        PlayerData.LoadData();
+        PlayerData2.LoadData();
     }
 
 

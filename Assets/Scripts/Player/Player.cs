@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Player : PlayerBase
 {
@@ -37,46 +38,37 @@ public class Player : PlayerBase
         camera = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         skill = GetComponent<Skill>();
-        //meshs = GetComponentsInChildren<MeshRenderer>();
-
     }
 
     void Start()
     {
         Invoke("ClearNav", 2.0f);
+        DataManager.Instance.LoadGameData();
+
+        //agent.enabled = false;
 
     }
 
     private void Update()
     {
+        canGame = agent.enabled;
+
         if (canGame)
         {
             InputSkillBtn();
-
+            if (Input.GetKeyDown(KeyCode.N)) { SceneManager.LoadScene("Stage1"); }
             if (Input.GetKeyDown(KeyCode.S) && !isAttackNow) { MoveStop(); }
             if (!isMove && !isAttackNow) { NormalAttack(); }
             if (!isAttackNow) { LookMoveDirection(); } // ¿òÁ÷ÀÓ
         }
-
-
-        /*
-        if (!agent.enabled)
-        {
-            agent.enabled = true;
-        }
-        */
-
     }
 
 
     // navigation
     private void ClearNav()
     {
-
         agent.enabled = false;
         agent.enabled = true;
-
-        canGame = true;
     }
    
 

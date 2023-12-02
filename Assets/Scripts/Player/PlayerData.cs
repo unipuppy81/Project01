@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData2 : MonoBehaviour
 {
    public static void SaveData()
     {
