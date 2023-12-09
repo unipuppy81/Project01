@@ -20,8 +20,6 @@ public class Attack01 : MonoBehaviour
         {
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             enemy.GetDamage(damage);
-
-            Debug.Log("At01");
         }
         Instantiate(Effect, transform.position, Quaternion.identity);
 

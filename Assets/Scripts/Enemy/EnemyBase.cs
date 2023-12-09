@@ -4,10 +4,17 @@ using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 
+enum EnemyType
+{
+    A,B
+}
 
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField]
+    EnemyType eType;
+
     public float detectionRadius = 5.0f;
     public float enemySpeed = 3.0f;
     public bool isDragging;
@@ -19,7 +26,7 @@ public class EnemyBase : MonoBehaviour
     float dragDamage = 1.0f;
 
     public Vector3 DragPosition;
-    public GameObject playerObj;
+    GameObject playerObj;
 
 
     Animator anim;
@@ -38,19 +45,28 @@ public class EnemyBase : MonoBehaviour
 
     void Update()
     {
-        PlayerDetection();
-        if (isDetect && !isDragging && !player.isDamage) { chaseTarget(); }
-
-        if (isDragging)
+        if (eType == EnemyType.A)
         {
-            rb.MovePosition(Vector3.Lerp(transform.position, DragPosition, Time.deltaTime * 1.0f));
-            DragDamage();
+            PlayerDetection();
+            if (isDetect && !isDragging && !player.isDamage) { chaseTarget(); }
+
+            if (isDragging)
+            {
+                rb.MovePosition(Vector3.Lerp(transform.position, DragPosition, Time.deltaTime * 1.0f));
+                DragDamage();
+            }
+
+            
+            if (player.isDamage)
+            {
+                StartCoroutine(Attack());
+                SetAnimBool();
+            }
+            
         }
-
-        if (player.isDamage) 
+        else if(eType == EnemyType.B)
         {
-            StartCoroutine(Attack());
-            SetAnimBool();
+
         }
     }
 

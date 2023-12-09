@@ -8,16 +8,28 @@ public class Enemy : EnemyBase
     [SerializeField] GameObject coin;
     public bool isDie;
     public float damage;
-    // Start is called before the first frame update
-    void Awake()
+
+    GameObject playerObj1;
+    Player player1;
+
+    void Start()
     {
         damage = 10.0f;
         isDie = false;
+        playerObj1 = GameObject.Find("Player01");
+        player1 = playerObj1.GetComponent<Player>();
     }
 
     void Update()
     {
         if (isDie) { DieNow(); }
+
+        /*
+        if (player1.isDamage)
+        {
+            StartCoroutine(Attack());
+        }
+        */
     }
 
     void DieNow()
