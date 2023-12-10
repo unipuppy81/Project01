@@ -34,6 +34,9 @@ public class EnemyBase : MonoBehaviour
     Rigidbody rb;
     Player player;
 
+    public RuntimeAnimatorController originalAnimator;
+    public bool isEnemyBullet;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,7 +51,7 @@ public class EnemyBase : MonoBehaviour
         if (eType == EnemyType.A)
         {
             PlayerDetection();
-            if (isDetect && !isDragging && !player.isDamage) { chaseTarget(); }
+            if (isDetect && !isDragging && !isEnemyBullet) { chaseTarget(); }
 
             if (isDragging)
             {
@@ -57,7 +60,7 @@ public class EnemyBase : MonoBehaviour
             }
 
             
-            if (player.isDamage)
+            if (isEnemyBullet)
             {
                 StartCoroutine(Attack());
                 SetAnimBool();
@@ -151,6 +154,6 @@ public class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(.5f);
 
         anim.SetBool("isAttack", false);
-        anim.SetBool("isWalk", true);
+        //anim.SetBool("isWalk", true);
     }
 }

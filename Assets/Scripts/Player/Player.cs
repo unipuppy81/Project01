@@ -236,8 +236,13 @@ public class Player : PlayerBase
             if (!isDamage) { 
             Bullet enemyBullet = other.GetComponent<Bullet>();
             PlayerHealth playerH = this.GetComponent<PlayerHealth>();
-                StartCoroutine(OnDamage());
+
+                GameObject enemyObject = other.transform.root.gameObject;
+                EnemyBase enemyBase = enemyObject.GetComponent<EnemyBase>();
+                
+                StartCoroutine(OnDamage(enemyBase));
             playerH.GetDamage(10.0f);
+                
 
             }
         }
@@ -419,12 +424,13 @@ public class Player : PlayerBase
 
     // Ondamage
 
-    protected virtual IEnumerator OnDamage()
+    protected virtual IEnumerator OnDamage(EnemyBase enemyBase)
     {
         isDamage = true;
-
+        enemyBase.isEnemyBullet = true;
         yield return new WaitForSeconds(.5f);
         
         isDamage = false;
+        enemyBase.isEnemyBullet = false;
     }
 }

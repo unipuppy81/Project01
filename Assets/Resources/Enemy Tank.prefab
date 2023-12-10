@@ -86,7 +86,7 @@ MonoBehaviour:
   isDragging: 0
   isDetect: 0
   DragPosition: {x: 0, y: 0, z: 0}
-  playerObj: {fileID: 0}
+  originalAnimator: {fileID: 0}
 --- !u!114 &1456713385422308857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   isDragging: 0
   isDetect: 0
   DragPosition: {x: 0, y: 0, z: 0}
-  playerObj: {fileID: 0}
+  originalAnimator: {fileID: 9100000, guid: 63149a4c7d499c047b2bc07ad0acad86, type: 2}
   coin: {fileID: 977860346827334077, guid: c5cb2214935b3474da55a0f9196b002c, type: 3}
   isDie: 0
   damage: 0
