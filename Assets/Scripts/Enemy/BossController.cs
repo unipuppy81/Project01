@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
@@ -19,24 +20,29 @@ public class BossController : MonoBehaviour
     Animator anim;
 
     [Header("SpawnTanker")]
-    [SerializeField]
-    Transform[] spawnPoints;
+    [SerializeField]    Transform[] spawnPoints;
+    [SerializeField]    GameObject tankPrefab;
 
-    [SerializeField]
-    GameObject tankPrefab;
 
+    [Header("AttackKnife")]
+    public GameObject projectilePrefab; // 프로젝타일 프리팹
+    public Transform[] firePoint; // 발사 위치
+
+    public float projectileSpeed = 10f; // 프로젝타일 속도
+    public float cooldown = 1f; // 공격 쿨다운 시간
+    private float lastAttackTime; // 마지막 공격 시간
+
+    [SerializeField] GameObject targetObject;
 
     [Header("RainShower")]
-    [SerializeField]
-    Transform[] rainSpawnPoint;
-
-    [SerializeField]
-    GameObject attackPrefab;
+    [SerializeField]    Transform[] rainSpawnPoint;
+    [SerializeField]    GameObject attackPrefab;
 
 
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        targetObject = GameObject.FindWithTag("Player");
         SetPos();
     }
 
@@ -63,12 +69,21 @@ public class BossController : MonoBehaviour
             spawnPoints[i] = spawnGroup.GetChild(i);
         }
 
+        Transform shootTransform = GameObject.Find("ShootTransform").transform;
+        firePoint = new Transform[shootTransform.childCount];
+        for (int i = 0; i < shootTransform.childCount; i++)
+        {
+            firePoint[i] = shootTransform.GetChild(i);
+        }
+
         Transform rainSpawnGrop = GameObject.Find("AttackPosGroup").transform;
         rainSpawnPoint = new Transform[rainSpawnGrop.childCount];
         for(int i = 0; i < rainSpawnGrop.childCount; i++)
         {
             rainSpawnPoint[i] = rainSpawnGrop.GetChild(i);
         }
+        
+        
 
     }
     void SwitchToNextPattern()
@@ -98,6 +113,22 @@ public class BossController : MonoBehaviour
 
             Instantiate(tankPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
         }
+        else if (attackPatterns[index].patternName == "AttackKnife")
+        {
+            /*
+            foreach(Transform t in firePoint)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, t.position, projectilePrefab.transform.rotation);
+                Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+                EnemyShoot es = projectile.GetComponent<EnemyShoot>();
+                Transform targetTransform = targetObject.transform;
+                es.SetPlayerPosition(targetTransform.position);
+                //projectileRb.velocity = t.forward * projectileSpeed;
+            }
+            */
+
+            StartCoroutine(FireProjectiles());
+        }
         else if (attackPatterns[index].patternName == "RainShower")
         {
             for (int i = 0; i < 5; i++)
@@ -108,6 +139,26 @@ public class BossController : MonoBehaviour
             }
         }
     }
+
+    IEnumerator FireProjectiles()
+    {
+        foreach (Transform t in firePoint)
+        {
+            GameObject projectile = Instantiate(projectilePrefab, t.position, Quaternion.identity);
+            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+            EnemyShoot es = projectile.GetComponent<EnemyShoot>();
+
+            Transform targetTransform = targetObject.transform;
+            es.SetPlayerPosition(targetTransform.position);
+
+            // 각 발사체마다 개별적으로 속도를 적용하려면 이 부분을 사용할 수 있습니다.
+            // projectileRb.velocity = t.forward * projectileSpeed;
+
+            // 발사 간격을 두기 위해 다음 발사를 기다립니다.
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
 }
 
 

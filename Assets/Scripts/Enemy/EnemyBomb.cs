@@ -73,14 +73,14 @@ public class EnemyBomb : MonoBehaviour
             PlayerHealth player= other.GetComponent<PlayerHealth>();
             // 플레이어 데미지
 
-            Instantiate(Effect, new Vector3(transform.position.x, transform.position.y - 12f, transform.position.z)
+            Instantiate(Effect, new Vector3(transform.position.x, transform.position.y, transform.position.z)
     , Quaternion.identity);
 
             Destroy(this.gameObject);
         }
         else if(other.gameObject.tag == "Ground")
         {
-            Instantiate(Effect, new Vector3(transform.position.x, transform.position.y - 12f, transform.position.z)
+            Instantiate(Effect, new Vector3(transform.position.x, transform.position.y, transform.position.z)
     , Quaternion.identity);
 
             Destroy(this.gameObject);

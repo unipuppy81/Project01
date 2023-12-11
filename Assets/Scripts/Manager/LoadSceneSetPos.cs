@@ -6,6 +6,7 @@ using UnityEngine;
 public class LoadSceneSetPos : MonoBehaviour
 {
     [SerializeField] GameObject stage1Pos;
+    [SerializeField] GameObject stage2Pos;
 
     Player player;
     bool isLoading = false;
@@ -19,22 +20,32 @@ public class LoadSceneSetPos : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(SetPos());
+          
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Dungeon"))
+        {
+            StartCoroutine(SetPos(stage2Pos));
+        }
+        else if (other.CompareTag("BossDungeon"))
+        {
+            StartCoroutine(SetPos(stage1Pos));
+        }
+    }
 
-    IEnumerator SetPos()
+    IEnumerator SetPos(GameObject obj)
     {
         player.agent.enabled = false;
-        this.transform.position = stage1Pos.transform.position;
+        this.transform.position = obj.transform.position;
         
         yield return new WaitForSeconds(2.0f);
         
         player.agent.enabled = true;
         
         yield return null;
-
     }
 }
 

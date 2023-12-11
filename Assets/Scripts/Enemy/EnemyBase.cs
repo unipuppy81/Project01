@@ -114,13 +114,9 @@ public class EnemyBase : MonoBehaviour
         { 
             foreach (Collider collider in hitColliders)
             {
-                if (collider.CompareTag("Player")) // 플레이어 태그가 적절한 경우
+                if (collider.CompareTag("Player")) 
                 {
-                    isDetect = true;
-                    
-
-                    // 감지된 플레이어와의 상호작용 코드를 작성합니다.
-                    Debug.Log("플레이어 감지됨!");
+                    isDetect = true;                   
                 }
             }   
         }

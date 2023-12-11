@@ -35,10 +35,4 @@ public class StageManager : MonoBehaviour
             animator.runtimeAnimatorController = specificAnimatorController;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
