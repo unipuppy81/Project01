@@ -12,13 +12,11 @@ public class ShopNPC : MonoBehaviour
 
     public void Enter()
     {
-        Debug.Log("Enter");
         uiGruop.SetActive(true);
     }
 
     public void Exit()
     {
-        Debug.Log("Exit");
         uiGruop.SetActive(false);
     }
 

@@ -24,16 +24,9 @@ public class LoadSceneSetPos : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void SetPosFunction()
     {
-        if (other.CompareTag("Dungeon"))
-        {
-            StartCoroutine(SetPos(stage2Pos));
-        }
-        else if (other.CompareTag("BossDungeon"))
-        {
-            StartCoroutine(SetPos(stage1Pos));
-        }
+        StartCoroutine(SetPos(stage1Pos));
     }
 
     IEnumerator SetPos(GameObject obj)
