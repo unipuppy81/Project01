@@ -9,9 +9,13 @@ public class EnemyShoot : MonoBehaviour
 
     [SerializeField] private Vector3 targetPosition; // 플레이어의 이전 위치
 
+
+    [SerializeField] private GameObject enemyBulletEffect;
+    [SerializeField] private float Damage;
+
     private void Start()
     {
-        
+        Damage = 15.0f;
     }
 
     void Update()
@@ -33,7 +37,9 @@ public class EnemyShoot : MonoBehaviour
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
         if (distanceToTarget < 0.1f)
         {
+            Instantiate(enemyBulletEffect, transform.position, transform.rotation);
             Destroy(gameObject);
+
         }
     }
 
@@ -47,8 +53,8 @@ public class EnemyShoot : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerHealth>();
-
+            PlayerHealth playerh = collision.gameObject.GetComponent<PlayerHealth>();
+            playerh.GetDamage(Damage);
             
             Destroy(gameObject);
         }

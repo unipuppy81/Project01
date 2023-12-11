@@ -11,6 +11,7 @@ public class EnemyBomb : MonoBehaviour
     public Transform attackStartPoint;
     public float maxDistance = 100f;
 
+    [SerializeField] private float Damage;
     private void Start()
     {
         lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -19,12 +20,16 @@ public class EnemyBomb : MonoBehaviour
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
 
+        Damage = 10.0f;
+
         AttackLine();
     }
+
     private void Update()
     {
 
     }
+
     void AttackLine()
     {
         // 시작점의 좌표
@@ -71,7 +76,7 @@ public class EnemyBomb : MonoBehaviour
         if (other.gameObject.tag == "Player") {
 
             PlayerHealth player= other.GetComponent<PlayerHealth>();
-            // 플레이어 데미지
+            player.GetDamage(Damage);
 
             Instantiate(Effect, new Vector3(transform.position.x, transform.position.y, transform.position.z)
     , Quaternion.identity);

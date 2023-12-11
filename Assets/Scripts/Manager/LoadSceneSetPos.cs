@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class LoadSceneSetPos : MonoBehaviour
 {
-    [SerializeField] GameObject stage1Pos;
-    [SerializeField] GameObject stage2Pos;
+    [SerializeField] GameObject dungeonEnterPos;
+    [SerializeField] GameObject bossEnterPos;
+
+    [SerializeField] GameObject Boss;
+    BossController bossController;
 
     Player player;
     bool isLoading = false;
@@ -14,19 +17,25 @@ public class LoadSceneSetPos : MonoBehaviour
     void Start()
     {
         player = GetComponent<Player>();
+        bossController = Boss.GetComponent<BossController>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.X))
         {
-          
+            SetPosBossEnter();
         }
     }
-
-    public void SetPosFunction()
+    public void SetPosDungeonEnter()
     {
-        StartCoroutine(SetPos(stage1Pos));
+        StartCoroutine(SetPos(dungeonEnterPos));
+    }
+
+    public void SetPosBossEnter()
+    {
+        StartCoroutine(SetPos(bossEnterPos));
+        bossController.bossStart = true;
     }
 
     IEnumerator SetPos(GameObject obj)
@@ -37,7 +46,8 @@ public class LoadSceneSetPos : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         
         player.agent.enabled = true;
-        
+
+
         yield return null;
     }
 }

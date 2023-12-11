@@ -28,10 +28,21 @@ public class PlayerBase : MonoBehaviour
         AttackEffect = Resources.LoadAll<GameObject>("Resources");
     }
 
+    protected virtual void Start()
+    {
+        Player playerScript = GetComponent<Player>();
+        Destroy(GetComponent<Rigidbody>());
+    }
+
     protected virtual void OnEnable()
     {
         ch_State = CH_STATE.Idle;
         StartCoroutine(MainC());
+    }
+
+    public void ReleaseRigidbodyReference()
+    {
+        b_rigid = null;
     }
 
     public void SetState(CH_STATE newState)

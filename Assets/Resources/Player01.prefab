@@ -443,7 +443,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!195 &1004667127783340374
 NavMeshAgent:
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5737251beb8f8c34fa828a2e374cf993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  b_rigid: {fileID: 1004667127783340375}
+  b_rigid: {fileID: 0}
   b_animator: {fileID: 6787961267464771427}
   ch_State: 0
   isNewState: 0
@@ -487,6 +487,7 @@ MonoBehaviour:
   - {fileID: 100010, guid: 1a04cb529b7cfe844a146801faabb1e5, type: 3}
   agent: {fileID: 0}
   canGame: 0
+  isDamage: 0
   bullet: {fileID: 7375395205466429629, guid: 3efd8607be583074297ee975b5363d10, type: 3}
   bulletPos: {fileID: 304270401617600307}
   target: {fileID: 0}
@@ -593,7 +594,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf3cc423e4c1f747a3ab8d4f4113fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowGold: 0
 --- !u!114 &-7200559392243900872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +619,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b82f24a0577aed4f9ea5f805a7a57da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage1Pos: {fileID: 0}
+  dungeonEnterPos: {fileID: 0}
+  bossEnterPos: {fileID: 0}
+  Boss: {fileID: 0}
 --- !u!114 &-7145207891683763906
 MonoBehaviour:
   m_ObjectHideFlags: 0

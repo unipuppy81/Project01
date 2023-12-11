@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using TMPro;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
@@ -18,6 +19,12 @@ public class BossController : MonoBehaviour
 
 
     Animator anim;
+    EnemyHealth eh;
+
+    [SerializeField]    GameObject HPbar;
+    [SerializeField] TextMeshProUGUI textHP;
+     
+
 
     [Header("SpawnTanker")]
     [SerializeField]    Transform[] spawnPoints;
@@ -42,6 +49,7 @@ public class BossController : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        eh = GetComponentInChildren<EnemyHealth>();
         targetObject = GameObject.FindWithTag("Player");
         SetPos();
     }
@@ -50,6 +58,8 @@ public class BossController : MonoBehaviour
     {
         if (bossStart)
         {
+            HPbar.SetActive(true);
+            if (textHP != null) { textHP.text = $"{eh.curHP:F0}/{eh.maxHP:F0}"; };
             // 일정 시간마다 다음 패턴으로 전환
             timeSinceLastPattern += Time.deltaTime;
             if (timeSinceLastPattern >= timeBetweenPatterns)
@@ -115,23 +125,11 @@ public class BossController : MonoBehaviour
         }
         else if (attackPatterns[index].patternName == "AttackKnife")
         {
-            /*
-            foreach(Transform t in firePoint)
-            {
-                GameObject projectile = Instantiate(projectilePrefab, t.position, projectilePrefab.transform.rotation);
-                Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-                EnemyShoot es = projectile.GetComponent<EnemyShoot>();
-                Transform targetTransform = targetObject.transform;
-                es.SetPlayerPosition(targetTransform.position);
-                //projectileRb.velocity = t.forward * projectileSpeed;
-            }
-            */
-
             StartCoroutine(FireProjectiles());
         }
         else if (attackPatterns[index].patternName == "RainShower")
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 int randomIndex = Random.Range(0, rainSpawnPoint.Length);
 

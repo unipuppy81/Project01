@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
     
     void Start()
     {
-        Transform spawnGroup = GameObject.Find("Spawn").transform;
+        Transform spawnGroup = GameObject.Find("EnemySpawn").transform;
         stage1Spawn = new Transform[spawnGroup.childCount];
         for (int i = 0; i < spawnGroup.childCount; i++)
         {

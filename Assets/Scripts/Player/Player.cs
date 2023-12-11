@@ -9,12 +9,15 @@ using UnityEngine.SceneManagement;
 
 public class Player : PlayerBase
 {
+    public static bool isPlayerDead = false;
+
     [Header("Player")]
 
     private Camera camera;
     public NavMeshAgent agent;
     private Skill skill;
     //MeshRenderer[] meshs;
+
 
     public bool canGame = false;
     private bool isMove;
@@ -44,9 +47,6 @@ public class Player : PlayerBase
     {
         Invoke("ClearNav", 2.0f);
         DataManager.Instance.LoadGameData();
-
-        //agent.enabled = false;
-
     }
 
     private void Update()

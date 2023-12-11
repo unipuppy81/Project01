@@ -6,11 +6,23 @@ public class DungeonManager : MonoBehaviour
 {
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (this.gameObject.name == "DungeonZone")
         {
-            LoadSceneSetPos loadSceneSetPos = new LoadSceneSetPos();
-            loadSceneSetPos = other.gameObject.GetComponent<LoadSceneSetPos>();
-            loadSceneSetPos.SetPosFunction();
+            if (other.CompareTag("Player"))
+            {
+                LoadSceneSetPos loadSceneSetPos = new LoadSceneSetPos();
+                loadSceneSetPos = other.gameObject.GetComponent<LoadSceneSetPos>();
+                loadSceneSetPos.SetPosDungeonEnter();
+            }
+        }
+        else if(this.gameObject.name == "BossRoomTP")
+        {
+            if (other.CompareTag("Player"))
+            {
+                LoadSceneSetPos loadSceneSetPos = new LoadSceneSetPos();
+                loadSceneSetPos = other.gameObject.GetComponent<LoadSceneSetPos>();
+                loadSceneSetPos.SetPosBossEnter();
+            }
         }
     }
 }

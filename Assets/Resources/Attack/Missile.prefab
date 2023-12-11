@@ -277,8 +277,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.538214, y: 1, z: 1}
-  m_Center: {x: 0.0016015768, y: 0, z: 0}
+  m_Size: {x: 2.78, y: 2.5688212, z: 3.272551}
+  m_Center: {x: 0.0016015768, y: 0.042810023, z: 0.10874343}
 --- !u!114 &-9131157490689494117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,3 +294,4 @@ MonoBehaviour:
   Effect: {fileID: 4593184484909914552, guid: 4fee50b076593be4c8ad953ceb09f08b, type: 3}
   attackStartPoint: {fileID: 7391356085669366647}
   maxDistance: 100
+  Damage: 0

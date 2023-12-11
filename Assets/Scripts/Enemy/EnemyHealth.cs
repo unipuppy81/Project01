@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class EnemyHealth : Enemy
 {
+    [SerializeField] EnemyType type;
+
     public float curHP;
-    public float maxHP = 10.0f;
+    public float maxHP;
     EnemyBase eb;
 
     public GameObject hudDamageText;
@@ -15,17 +17,28 @@ public class EnemyHealth : Enemy
     void Start()
     {
         eb = GetComponent<EnemyBase>();
-        //anim2 = GetComponentInChildren<Animator>();
     }
     void Awake()
     {
-        curHP = maxHP;
+        if (type == EnemyType.A)
+        {
+            maxHP = 10.0f;
+            curHP = maxHP;
+        }
+        else if (type == EnemyType.B)
+        {
+            maxHP = 100.0f;
+            curHP = maxHP;
+        }
+
+
     }
 
     public void GetDamage(float damage)
     {
         if(curHP > 0) 
         { 
+            
             curHP -= damage;
             DamageText(damage);
             if (IsDeath()) 

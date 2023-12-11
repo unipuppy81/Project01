@@ -34,7 +34,10 @@ public class PlayerHealth : MonoBehaviour
         currentHP -= damage;
 
         if (IsDeath())
+        {
+            Player.isPlayerDead = true;
             currentHP = 0.0f;
+        }
 
         UpdateHealthBar();
     }
