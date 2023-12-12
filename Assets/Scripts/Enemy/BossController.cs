@@ -81,7 +81,7 @@ public class BossController : MonoBehaviour
         {
             Vector3 coinPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
 
-
+            HPbar.SetActive(false);
             Instantiate(bigCoin, coinPos, transform.rotation);
             goTown.SetActive(true);
 
