@@ -20,7 +20,7 @@ public class Coin : MonoBehaviour
     {
         if (coinT == CoinType.Gold)
         {
-            coinValue = 30;
+            coinValue = 100;
          }
         else if (coinT == CoinType.Sliver)
         {

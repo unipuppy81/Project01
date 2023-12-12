@@ -7,6 +7,7 @@ public class LoadSceneSetPos : MonoBehaviour
 {
     [SerializeField] GameObject dungeonEnterPos;
     [SerializeField] GameObject bossEnterPos;
+    [SerializeField] GameObject comeBackHomePos;
 
     [SerializeField] GameObject Boss;
     BossController bossController;
@@ -36,6 +37,11 @@ public class LoadSceneSetPos : MonoBehaviour
     {
         StartCoroutine(SetPos(bossEnterPos));
         bossController.bossStart = true;
+    }
+
+    public void SetPosTown()
+    {
+        StartCoroutine(SetPos(comeBackHomePos)); 
     }
 
     IEnumerator SetPos(GameObject obj)

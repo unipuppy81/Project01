@@ -34,7 +34,10 @@ public class SceneChangeManager : MonoBehaviour
         
     }
 
-
+    public void goCharacterSelect()
+    {
+        SceneManager.LoadScene("CharacterSetScene");
+    }
 
     public void ExplainEnter()
     {

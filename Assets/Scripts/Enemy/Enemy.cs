@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Enemy : EnemyBase
 {
-
+    
     [SerializeField] GameObject coin;
+
     public bool isDie;
     public float damage;
 
     GameObject playerObj1;
     Player player1;
-
+    EnemyHealth eh;
     void Start()
     {
         damage = 10.0f;
         isDie = false;
         playerObj1 = GameObject.Find("Player01");
+        eh = GetComponent<EnemyHealth>();
         player1 = playerObj1.GetComponent<Player>();
     }
 

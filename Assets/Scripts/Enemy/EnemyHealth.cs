@@ -10,6 +10,7 @@ public class EnemyHealth : Enemy
     public float curHP;
     public float maxHP;
     EnemyBase eb;
+    BossController bc;
 
     public GameObject hudDamageText;
     public Transform hudPos;
@@ -17,6 +18,7 @@ public class EnemyHealth : Enemy
     void Start()
     {
         eb = GetComponent<EnemyBase>();
+        bc =    GetComponent<BossController>();
     }
     void Awake()
     {
@@ -43,8 +45,16 @@ public class EnemyHealth : Enemy
             DamageText(damage);
             if (IsDeath()) 
             {
-                curHP = 0.0f;
-                isDie = true;
+                if (type == EnemyType.A)
+                {
+                    curHP = 0.0f;
+                    isDie = true;
+                }
+                else if(type == EnemyType.B)
+                {
+                    curHP = 0.0f;
+                    bc.bossDie = true;
+                }
             }
 
             StartCoroutine(eb.OnDamage());

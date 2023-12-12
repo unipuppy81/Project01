@@ -15,7 +15,7 @@ public class Attack01 : MonoBehaviour
     {
         float damage;
 
-        damage = 100.0f;
+        damage = 8.0f;
         if (other.gameObject.tag == "Enemy") 
         {
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();

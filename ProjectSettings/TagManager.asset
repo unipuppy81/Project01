@@ -15,6 +15,7 @@ TagManager:
   - Shop
   - EnemyBullet
   - Dungeon
+  - SelectCha
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,14 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     public bool bossStart;
+    public bool bossDie;
+
+    
+    [SerializeField] GameObject goTown;
+    [SerializeField] GameObject bigCoin;
+    [SerializeField] AudioClip bossDieAudio;
+
+
 
     public AttackPattern[] attackPatterns;
 
@@ -68,6 +76,20 @@ public class BossController : MonoBehaviour
                 SwitchToNextPattern();
             }
         }
+
+        if (bossDie)
+        {
+            Vector3 coinPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+
+
+            Instantiate(bigCoin, coinPos, transform.rotation);
+            goTown.SetActive(true);
+
+            SoundManager.Instance.PlaySound(bossDieAudio);
+
+            Destroy(this.gameObject);
+        }
+
     }
 
     void SetPos()
