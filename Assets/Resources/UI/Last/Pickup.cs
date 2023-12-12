@@ -21,11 +21,11 @@ public class Pickup : MonoBehaviour
         uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         if(consumeType == ConsumeItemType.HealthPotion)
         {
-            potionCost = 1000;
+            potionCost = 0;
         }
         else if(consumeType == ConsumeItemType.ManaPotion)
         {
-            potionCost = 500;
+            potionCost = 0;
         }
     }
 
@@ -33,14 +33,13 @@ public class Pickup : MonoBehaviour
     {
         if(PlayerGold.nowGold < potionCost) 
         {
-            Debug.Log("Error");
             uiManager.coinErrorEnter();
         }
         else if(PlayerGold.nowGold > potionCost)
         { 
             for (int i = 0; i < inventory.slots.Length; i++)
             {
-                if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 9)
+                if (inventory.isFull[i] == true && inventory.slots[i].transform.GetComponent<SlotR>().amount < 99)
                 {
                     if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName)
                     {

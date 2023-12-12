@@ -91,10 +91,13 @@ public class Player : PlayerBase
             isAttackNow = true;
             skill.isMouseBtn3 = true;
         }
-        else if(Input.GetKeyDown(KeyCode.R) && !isMove && !isAttackNow)
+        else if(Input.GetKeyDown(KeyCode.R))
         {
-            isAttackNow = true;
-            SetState(CH_STATE.JumpStart);
+            // 체력
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            // 마나
         }
         else if (Input.GetKeyDown(KeyCode.D))  // 상태를 푸는 행위
         {
