@@ -16,7 +16,6 @@ public class Player : PlayerBase
     private Camera camera;
     public NavMeshAgent agent;
     private Skill skill;
-    //MeshRenderer[] meshs;
 
 
     public bool canGame = false;
@@ -93,11 +92,13 @@ public class Player : PlayerBase
         }
         else if(Input.GetKeyDown(KeyCode.R))
         {
-            // 체력
+            PlayerHealth ph = GetComponent<PlayerHealth>();
+            ph.RecoveryHP(20);
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
-            // 마나
+            PlayerMana pm = GetComponent<PlayerMana>();
+            pm.RecoveryMP(20);
         }
         else if (Input.GetKeyDown(KeyCode.D))  // 상태를 푸는 행위
         {
