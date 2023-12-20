@@ -14,26 +14,36 @@ public class Player : PlayerBase
     [Header("Player")]
 
     private Camera camera;
-    public NavMeshAgent agent;
     private Skill skill;
+    public DialogueManager dialManager;
 
 
+    public NavMeshAgent agent;
+    
+    private Vector3 destination;
+
+    [Header("StateBool")]
     public bool canGame = false;
     private bool isMove;
     private bool isAttackNow;
     private bool canAttack;
     public bool isDamage;
-    private Vector3 destination;
 
 
+
+    [Header("Skill")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private Transform bulletPos = null;
     [SerializeField] private Transform target = null;
-
     [SerializeField] private GameObject attack01Bullet = null;
-
-
     [SerializeField] private float playerAttackRange = 200.0f;
+
+
+
+
+    [Header("Dialogue")]
+    [SerializeField] Vector3 dirVec;
+    public GameObject scanObject;
 
     protected override void Awake()
     {
@@ -58,10 +68,49 @@ public class Player : PlayerBase
             if (Input.GetKeyDown(KeyCode.N)) { SceneManager.LoadScene("Stage1"); }
             if (Input.GetKeyDown(KeyCode.S) && !isAttackNow) { MoveStop(); }
             if (!isMove && !isAttackNow) { NormalAttack(); }
-            if (!isAttackNow) { LookMoveDirection(); } // 움직임
+            if (!isAttackNow && !dialManager.isAction) { LookMoveDirection(); } // 움직임
+            dirVec = this.gameObject.transform.forward; // Quest
+
+
+            // scanObj
+            if (Input.GetKeyDown(KeyCode.Space) && scanObject != null)
+            {
+                Debug.Log("This is : " + scanObject.name);
+                dialManager.Action(scanObject);
+            }
         }
     }
 
+    private void FixedUpdate()
+    {
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), dirVec, new UnityEngine.Color(0, 1, 0));
+
+        RaycastHit rayHit;
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), dirVec, out rayHit, 2.0f))
+        {
+
+            if (rayHit.collider != null)
+            {
+                if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Object"))
+                {
+                    scanObject = rayHit.collider.gameObject;
+                }
+                else
+                {
+                    scanObject = null;
+                }
+            }
+            else
+            {
+                scanObject = null;
+            }
+        }
+        else
+        {
+            scanObject = null;
+        }
+
+    }
 
     // navigation
     private void ClearNav()
