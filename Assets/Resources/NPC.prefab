@@ -1046,6 +1046,7 @@ GameObject:
   - component: {fileID: 6741448664472439253}
   - component: {fileID: 823669462825997231}
   - component: {fileID: 2562545706148416941}
+  - component: {fileID: -3594474402787645743}
   m_Layer: 8
   m_Name: NPC
   m_TagString: Untagged
@@ -1109,6 +1110,20 @@ CapsuleCollider:
   m_Height: 0.6400002
   m_Direction: 1
   m_Center: {x: 0, y: 0.29999995, z: 0}
+--- !u!114 &-3594474402787645743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252614193478439791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e2a522ff23a4748b81231598a00e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1000
+  isNpc: 1
 --- !u!1 &6846766177518172939
 GameObject:
   m_ObjectHideFlags: 0

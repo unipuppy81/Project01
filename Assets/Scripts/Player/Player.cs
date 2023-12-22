@@ -75,7 +75,6 @@ public class Player : PlayerBase
             // scanObj
             if (Input.GetKeyDown(KeyCode.Space) && scanObject != null)
             {
-                Debug.Log("This is : " + scanObject.name);
                 dialManager.Action(scanObject);
             }
         }

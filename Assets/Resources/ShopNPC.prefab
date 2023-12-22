@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 1024956598970767786}
   - component: {fileID: 6402232235166368720}
   - component: {fileID: 4323667352956890715}
+  - component: {fileID: -4624549447555309286}
   m_Layer: 8
   m_Name: ShopNPC
   m_TagString: Untagged
@@ -205,6 +206,20 @@ CapsuleCollider:
   m_Height: 0.5126751
   m_Direction: 1
   m_Center: {x: 0, y: 0.24366245, z: 0}
+--- !u!114 &-4624549447555309286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392569855949669136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e2a522ff23a4748b81231598a00e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 2000
+  isNpc: 1
 --- !u!1 &915241034304203636
 GameObject:
   m_ObjectHideFlags: 0
