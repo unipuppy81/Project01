@@ -23,14 +23,24 @@ public class QuestManager : MonoBehaviour
     void GenerateData()
     {
         questList.Add(10, new QuestData("첫 마을 방문", 
-                                new int[] { 1000, 2000 }));
+                                new int[] { 1000, 2000 },
+                                "0"));
 
         questList.Add(20, new QuestData("포션사기",
-                                 new int[] { 5000, 2000 }));
+                                 new int[] { 2000, 1000 },
+                                 "0"));
 
-        questList.Add(30, new QuestData("퀘스트 클리어",
-                         new int[] { 0 }));
+        /*questList.Add(30, new QuestData("퀘스트 클리어",
+                         new int[] { 0 }));   */
 
+        questList.Add(30, new QuestData("던전 들어가기",
+                                new int[] { 3000 },
+                                "0"));
+
+
+        questList.Add(40, new QuestData("던전 클리어하기",
+                               new int[] { 3000, 3000 },
+                               "0"));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -49,6 +59,8 @@ public class QuestManager : MonoBehaviour
         // Control Quest Object
         ControlObject();
 
+
+        Debug.Log(questList[questId].npcId.Length);
         // Talk Complete & Next Quest
         if(questActionIndex  == questList[questId].npcId.Length)
         {
@@ -85,10 +97,23 @@ public class QuestManager : MonoBehaviour
 
 
             case 20:
+                if (questActionIndex == 3)
+                {
+                    //questObject[1].SetActive(true);
+                }
+                break;
+            case 30:
                 if (questActionIndex == 1)
                 {
-                   
+                    questObject[1].SetActive(true);
+                }
+                break;
 
+            case 40:
+                if (questActionIndex == 2)
+                {
+                    Debug.Log("던전 클리ㅣㅣ어");
+                    //questObject[1].SetActive(true);
                 }
                 break;
         }

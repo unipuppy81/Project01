@@ -1124,6 +1124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1000
   isNpc: 1
+  objName: "\uC774\uC7A5 \uB0E5\uC774"
 --- !u!1 &6846766177518172939
 GameObject:
   m_ObjectHideFlags: 0

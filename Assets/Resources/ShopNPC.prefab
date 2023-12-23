@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2000
   isNpc: 1
+  objName: "\uC0C1\uC810 \uB0E5\uC774"
 --- !u!1 &915241034304203636
 GameObject:
   m_ObjectHideFlags: 0

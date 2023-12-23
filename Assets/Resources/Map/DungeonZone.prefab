@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 716670227372889411}
   - component: {fileID: 716670227372889412}
   - component: {fileID: 716670227372889409}
+  - component: {fileID: 8046379321501161498}
   m_Layer: 0
   m_Name: DungeonZone
   m_TagString: Dungeon
@@ -4839,5 +4840,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0d710003a8e9b4ab1ec7c39ce98c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DungeonAudio: {fileID: 8300000, guid: 741a07d6afb087d4d847aafa0978801a, type: 3}
-  BossAudio: {fileID: 8300000, guid: 01a46e9fcad6fa24d96f919a50d9d170, type: 3}
+  dungeonAudio: {fileID: 0}
+  bossAudio: {fileID: 0}
+--- !u!114 &8046379321501161498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716670227372889414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e2a522ff23a4748b81231598a00e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 200
+  isNpc: 0
