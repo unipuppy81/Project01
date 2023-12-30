@@ -9,7 +9,7 @@ public class BossController : MonoBehaviour
     public bool bossStart;
     public bool bossDie;
 
-    
+    [SerializeField] GameObject questBox;
     [SerializeField] GameObject goTown;
     [SerializeField] GameObject bigCoin;
     [SerializeField] AudioClip bossDieAudio;
@@ -83,6 +83,7 @@ public class BossController : MonoBehaviour
 
             HPbar.SetActive(false);
             Instantiate(bigCoin, coinPos, transform.rotation);
+            questBox.SetActive(true);
             goTown.SetActive(true);
 
             SoundManager.Instance.PlaySound(bossDieAudio);

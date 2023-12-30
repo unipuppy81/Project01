@@ -5,9 +5,17 @@ using UnityEngine;
 public class DungeonManager : MonoBehaviour
 {
 
+    QuestManager qManager;
+    GameObject otherObject;
     public AudioClip dungeonAudio;
     public AudioClip bossAudio;
 
+
+    private void Start()
+    {
+        otherObject = GameObject.Find("QuestManager");
+        qManager = otherObject.GetComponent<QuestManager>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -15,6 +23,8 @@ public class DungeonManager : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
+                qManager.EnterDungeon();
+
                 LoadSceneSetPos loadSceneSetPos = new LoadSceneSetPos();
                 loadSceneSetPos = other.gameObject.GetComponent<LoadSceneSetPos>();
                 loadSceneSetPos.SetPosDungeonEnter();
@@ -26,6 +36,8 @@ public class DungeonManager : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
+             
+
                 LoadSceneSetPos loadSceneSetPos = new LoadSceneSetPos();
                 loadSceneSetPos = other.gameObject.GetComponent<LoadSceneSetPos>();
                 loadSceneSetPos.SetPosBossEnter();
@@ -35,6 +47,7 @@ public class DungeonManager : MonoBehaviour
         }
         else if(this.gameObject.name == "GoTown")
         {
+            qManager.ClearDungeon();
             LoadSceneSetPos loadSceneSetPos = new LoadSceneSetPos();
             loadSceneSetPos = other.gameObject.GetComponent<LoadSceneSetPos>();
             loadSceneSetPos.SetPosTown();

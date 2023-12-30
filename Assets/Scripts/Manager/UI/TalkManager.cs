@@ -65,7 +65,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(11 + 2000, new string[]
         {
             "어 그래 여긴 상점이라고.",
-            "체력 포션 5개, 마나 포션 5개 사봐 한 번",
+            "체력 포션이랑 마나 포션을 사봐",
             "어디서 사냐고? 다 알게되있어 임마"
         });
 
@@ -115,7 +115,11 @@ public class TalkManager : MonoBehaviour
             "클리어하기 전엔 못 돌아와",
             "그래 가보자"
         });
-        
+
+        talkData.Add(40 + 500, new string[]
+        {
+            
+        });
 
         //Portrait Data
         portraitData.Add(1000, portraitArr[0]);

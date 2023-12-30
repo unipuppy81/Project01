@@ -15,8 +15,13 @@ public class EnemyHealth : Enemy
     public GameObject hudDamageText;
     public Transform hudPos;
 
+    [Header("Quest")]
+    QuestManager qManager;
+    GameObject otherObject;
     void Start()
     {
+        otherObject = GameObject.Find("QuestManager");
+        qManager = otherObject.GetComponent<QuestManager>();
         eb = GetComponent<EnemyBase>();
         bc =    GetComponent<BossController>();
     }
@@ -47,6 +52,7 @@ public class EnemyHealth : Enemy
             {
                 if (type == EnemyType.A)
                 {
+                    qManager.killCount++;
                     curHP = 0.0f;
                     isDie = true;
                 }

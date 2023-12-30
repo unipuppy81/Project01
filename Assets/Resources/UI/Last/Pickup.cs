@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    QuestManager qManager;
+    GameObject otherObject;
     UIManager uiManager;
     private InventoryController inventory;
     public GameObject itemButton;
@@ -17,6 +19,8 @@ public class Pickup : MonoBehaviour
 
     void Start()
     {
+        otherObject = GameObject.Find("QuestManager");
+        qManager = otherObject.GetComponent<QuestManager>();
         inventory = FindObjectOfType<InventoryController>();
         uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         if(consumeType == ConsumeItemType.HealthPotion)

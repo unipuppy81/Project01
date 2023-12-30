@@ -22,6 +22,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI coinText;
     public string coinString;
     [SerializeField] private GameObject coinErrorPanel;
+
+
+    [Header("Quest")]
+    public GameObject questPanel;
+    bool activeQuestList;
     
 
     private void Start()
@@ -41,6 +46,11 @@ public class UIManager : MonoBehaviour
         {
             activeInventory = !activeInventory;
             inventoryPanel.SetActive(activeInventory);
+        }
+        else if (Input.GetKeyDown(KeyCode.U))
+        {
+            activeQuestList = !activeQuestList;
+            questPanel.SetActive(activeQuestList);
         }
     }
 

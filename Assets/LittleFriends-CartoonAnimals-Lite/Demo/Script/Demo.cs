@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Demo : MonoBehaviour
+public class Demo2 : MonoBehaviour
 {
     public AnimationClip[] animatorClip;
     Button button;
