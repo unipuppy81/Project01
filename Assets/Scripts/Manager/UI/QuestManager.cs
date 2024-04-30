@@ -26,6 +26,7 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] Text hpGlobeText;
     [SerializeField] Text mpGlobeText;
+    [SerializeField] Text enemyKillCountText;
     
     void Awake()
     {
@@ -191,10 +192,14 @@ public class QuestManager : MonoBehaviour
     // 던전
     public void KillEnemyFive()
     {
-        QuestBtn qBtn;
-        qBtn = qListManager.dungeonChildObjects[0].GetComponent<QuestBtn>();
-        qBtn.ClearSet();
-        Debug.Log("5킬 클리어");
+        if (killCount <= 5)
+        {
+            enemyKillCountText.text = "적 5마리 처치하기 ( " + killCount + " / 5 )";
+        }
+        else if(killCount > 5)
+        {
+            enemyKillCountText.text = "적 5마리 처치하기 ( 5 / 5 )";
+        }
     }
     public void ClearDungeon()
     {

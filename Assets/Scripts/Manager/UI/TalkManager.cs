@@ -98,8 +98,6 @@ public class TalkManager : MonoBehaviour
             "이제 던전을 클리어 할 수 있을거라 믿어"
         });
 
-  
-
         talkData.Add(40 + 3000, new string[]
         {
             "고생했어",
@@ -108,7 +106,6 @@ public class TalkManager : MonoBehaviour
         });
 
         // Object
-
         talkData.Add(30 + 300, new string[]
         {
             "준비됐어?",

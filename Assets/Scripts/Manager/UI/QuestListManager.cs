@@ -37,9 +37,9 @@ public class QuestListManager : MonoBehaviour
         GetChildObjects(dungeonList, out dungeonChildObjects);
         GetChildObjects(shopList, out shopChildObjects);
 
-
         btnSet();
     }
+
 
 
     void GetChildObjects(GameObject parentObject, out GameObject[] childObjects)

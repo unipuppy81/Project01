@@ -27,7 +27,21 @@ public class UIManager : MonoBehaviour
     [Header("Quest")]
     public GameObject questPanel;
     bool activeQuestList;
-    
+
+
+    [Header("UI")]
+    [SerializeField] GameObject explainPanel;
+    bool activeExplain;
+
+    [SerializeField] GameObject SetPanel;
+
+
+    public Slider soundSlider; // 게임 소리 조절을 위한 Slider
+    public Slider mouseSensitivitySlider; // 마우스 속도 조절을 위한 Slider
+
+
+
+
 
     private void Start()
     {
@@ -37,7 +51,21 @@ public class UIManager : MonoBehaviour
         inven.onSlotCountChange += SlotChange;
         inven.onChangeItem += RedrawSlotUI;
         inventoryPanel.SetActive(activeInventory);
+        // Slider에 이벤트 리스너 추가
+        soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
+        mouseSensitivitySlider.onValueChanged.AddListener(ChangeMouseSensitivity);
+
+        if (questPanel.activeSelf)
+        {
+
+
+            questPanel.SetActive(false);
+
+
+        }
     }
+
+
 
     private void Update()
     {
@@ -102,5 +130,35 @@ public class UIManager : MonoBehaviour
     public void coinErrorEnter()
     {
         coinErrorPanel.SetActive(true);
+    }
+
+    public void ExplainPanelOnOff()
+    {
+        activeExplain = !activeExplain;
+        explainPanel.SetActive(activeExplain);
+    }
+
+    public void EnterSetPanel()
+    {
+        SetPanel.SetActive(true);
+    }
+    public void ExitSetPanel()
+    {
+        SetPanel.SetActive(false);
+    }
+
+
+    private void ChangeSoundVolume(float volume)
+    {
+        // 게임 사운드 조절
+        AudioListener.volume = volume;
+    }
+
+    private void ChangeMouseSensitivity(float sensitivity)
+    {
+        // 마우스 속도 조절
+        // 여기서는 예시로 마우스 회전 속도를 조절합니다.
+        float rotationSpeed = sensitivity * 100.0f;
+        // 여기에 원하는 동작을 추가하십시오.
     }
 }

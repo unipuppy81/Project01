@@ -17,6 +17,8 @@ public class Player : PlayerBase
     private Skill skill;
     public DialogueManager dialManager;
 
+    public Transform spot;
+
 
     public NavMeshAgent agent;
     
@@ -44,6 +46,8 @@ public class Player : PlayerBase
     [Header("Dialogue")]
     [SerializeField] Vector3 dirVec;
     public GameObject scanObject;
+
+
 
     protected override void Awake()
     {
@@ -164,10 +168,25 @@ public class Player : PlayerBase
             if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
             {
 
-                if (hit.transform.gameObject.CompareTag("Ground")) { SetDestination(hit.point); }
+                if (hit.transform.gameObject.CompareTag("Ground")) 
+                { 
+                    SetDestination(hit.point);
+
+                    spot.gameObject.SetActive(true);
+                    spot.position = new Vector3(hit.point.x, hit.point.y+.5f, hit.point.z);
+                }
 
             }
         }
+        else if(agent.remainingDistance < 0.1f)
+        {
+            spot.gameObject.SetActive(false);
+        }
+
+
+
+
+
 
         if (isMove)
         {
@@ -189,6 +208,7 @@ public class Player : PlayerBase
     {
         agent.SetDestination(hit);
         destination = hit;
+
         isMove = true;
         SetState(CH_STATE.BattleRunForward);
     }

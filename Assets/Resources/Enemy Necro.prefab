@@ -480,13 +480,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossStart: 0
+  bossDie: 0
+  bossDieEffect: {fileID: 0}
+  questBox: {fileID: 0}
+  goTown: {fileID: 0}
+  bigCoin: {fileID: 0}
+  bossDieAudio: {fileID: 0}
   attackPatterns:
   - patternName: SpawnTanker
   - patternName: AttackKnife
   - patternName: RainShower
   timeBetweenPatterns: 5
+  HPbar: {fileID: 0}
+  textHP: {fileID: 0}
   spawnPoints: []
-  tankPrefab: {fileID: 1456713385422308858, guid: e099063896a828146a5b87066d465c11, type: 3}
+  tankPrefab: {fileID: 1456713385422308858, guid: 2d17ac48ac5f2144f88ee8faf5e831a2, type: 3}
   projectilePrefab: {fileID: 3542834859214631171, guid: 4f5567570ce4fb14580acc142fdb04a2, type: 3}
   firePoint: []
   projectileSpeed: 10

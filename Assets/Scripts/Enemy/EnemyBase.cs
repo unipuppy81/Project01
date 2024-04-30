@@ -6,7 +6,7 @@ using UnityEngine;
 
 enum EnemyType
 {
-    A,B
+    A,B,C
 }
 
 
@@ -59,18 +59,37 @@ public class EnemyBase : MonoBehaviour
                 DragDamage();
             }
 
-            
+
             if (isEnemyBullet)
             {
                 StartCoroutine(Attack());
                 SetAnimBool();
             }
-            
+
         }
-        else if(eType == EnemyType.B)
+        else if (eType == EnemyType.B)
         {
 
         }
+        else if (eType == EnemyType.C)
+        {
+            isDetect = true;
+            if (isDetect && !isDragging && !isEnemyBullet) { chaseTarget(); }
+
+            if (isDragging)
+            {
+                rb.MovePosition(Vector3.Lerp(transform.position, DragPosition, Time.deltaTime * 1.0f));
+                DragDamage();
+            }
+
+
+            if (isEnemyBullet)
+            {
+                StartCoroutine(Attack());
+                SetAnimBool();
+            }
+        }
+
     }
 
     void SetAnimBool()

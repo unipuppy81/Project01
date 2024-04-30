@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
 {
     public bool bossStart;
     public bool bossDie;
+    public GameObject bossDieEffect;
 
     [SerializeField] GameObject questBox;
     [SerializeField] GameObject goTown;
@@ -80,7 +81,8 @@ public class BossController : MonoBehaviour
         if (bossDie)
         {
             Vector3 coinPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
-
+            DestroyEvery();
+            Instantiate(bossDieEffect, coinPos, transform.rotation);
             HPbar.SetActive(false);
             Instantiate(bigCoin, coinPos, transform.rotation);
             questBox.SetActive(true);
@@ -91,6 +93,17 @@ public class BossController : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+    }
+
+    void DestroyEvery()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // 각각의 적을 순회하면서 삭제합니다.
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
     }
 
     void SetPos()
